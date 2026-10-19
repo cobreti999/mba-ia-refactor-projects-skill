@@ -1,0 +1,184 @@
+[
+  {
+    "method": "GET",
+    "path": "/",
+    "status": 200,
+    "keys": [
+      "endpoints",
+      "mensagem",
+      "versao"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/health",
+    "status": 200,
+    "keys": [
+      "ambiente",
+      "counts",
+      "database",
+      "db_path",
+      "debug",
+      "secret_key",
+      "status",
+      "versao"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/produtos",
+    "status": 200,
+    "keys": [
+      "dados",
+      "sucesso"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/produtos/busca?q=Mouse",
+    "status": 200,
+    "keys": [
+      "dados",
+      "sucesso",
+      "total"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/produtos/1",
+    "status": 200,
+    "keys": [
+      "dados",
+      "sucesso"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/produtos",
+    "status": 201,
+    "keys": [
+      "dados",
+      "mensagem",
+      "sucesso"
+    ]
+  },
+  {
+    "method": "PUT",
+    "path": "/produtos/11",
+    "status": 200,
+    "keys": [
+      "mensagem",
+      "sucesso"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/usuarios",
+    "status": 201,
+    "keys": [
+      "dados",
+      "sucesso"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/usuarios",
+    "status": 200,
+    "keys": [
+      "dados",
+      "sucesso"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/usuarios/4",
+    "status": 200,
+    "keys": [
+      "dados",
+      "sucesso"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/login",
+    "status": 200,
+    "keys": [
+      "dados",
+      "mensagem",
+      "sucesso"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/pedidos",
+    "status": 201,
+    "keys": [
+      "dados",
+      "mensagem",
+      "sucesso"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/pedidos",
+    "status": 200,
+    "keys": [
+      "dados",
+      "sucesso"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/pedidos/usuario/4",
+    "status": 200,
+    "keys": [
+      "dados",
+      "sucesso"
+    ]
+  },
+  {
+    "method": "PUT",
+    "path": "/pedidos/1/status",
+    "status": 200,
+    "keys": [
+      "mensagem",
+      "sucesso"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/relatorios/vendas",
+    "status": 200,
+    "keys": [
+      "dados",
+      "sucesso"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/admin/query",
+    "status": 200,
+    "keys": [
+      "dados",
+      "sucesso"
+    ]
+  },
+  {
+    "method": "DELETE",
+    "path": "/produtos/11",
+    "status": 200,
+    "keys": [
+      "mensagem",
+      "sucesso"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/admin/reset-db",
+    "status": 200,
+    "keys": [
+      "mensagem",
+      "sucesso"
+    ]
+  }
+]
