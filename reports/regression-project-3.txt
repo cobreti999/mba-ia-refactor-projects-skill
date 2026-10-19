@@ -1,0 +1,21 @@
+test_category_delete_and_user_delete_are_atomic_with_expected_effects (test_app.ApplicationTests.test_category_delete_and_user_delete_are_atomic_with_expected_effects) ... ok
+test_concurrent_registration_has_single_identity_and_no_partial_row (test_app.ApplicationTests.test_concurrent_registration_has_single_identity_and_no_partial_row) ... ok
+test_error_boundary_json_http_headers_and_sensitive_diagnostics (test_app.ApplicationTests.test_error_boundary_json_http_headers_and_sensitive_diagnostics) ... ok
+test_explicit_legacy_password_reset_preserves_records_and_revokes_tokens (test_app.ApplicationTests.test_explicit_legacy_password_reset_preserves_records_and_revokes_tokens) ... ok
+test_factory_import_config_isolation_and_context_cleanup (test_app.ApplicationTests.test_factory_import_config_isolation_and_context_cleanup) ... ok
+test_n_plus_one_query_counts_do_not_grow_with_cardinality (test_app.ApplicationTests.test_n_plus_one_query_counts_do_not_grow_with_cardinality) ... ok
+test_overdue_and_statistics_share_clock_and_preserve_payload_variants (test_app.ApplicationTests.test_overdue_and_statistics_share_clock_and_preserve_payload_variants) ... ok
+test_owner_scoping_and_reassignment_protection (test_app.ApplicationTests.test_owner_scoping_and_reassignment_protection) ... ok
+test_password_hashes_and_all_user_representations_are_public (test_app.ApplicationTests.test_password_hashes_and_all_user_representations_are_public) ... ok
+test_password_update_revokes_previous_token (test_app.ApplicationTests.test_password_update_revokes_previous_token) ... ok
+test_real_tokens_expiration_tampering_and_current_account_state (test_app.ApplicationTests.test_real_tokens_expiration_tampering_and_current_account_state) ... ok
+test_roles_registration_privilege_escalation_and_manager_permissions (test_app.ApplicationTests.test_roles_registration_privilege_escalation_and_manager_permissions) ... ok
+test_rollbacks_after_flushed_write_and_following_operation (test_app.ApplicationTests.test_rollbacks_after_flushed_write_and_following_operation) ... ok
+test_seed_refuses_existing_data_and_rolls_back_each_stage (test_app.ApplicationTests.test_seed_refuses_existing_data_and_rolls_back_each_stage) ... ok
+test_task_validation_post_put_boundaries_and_no_partial_update (test_app.ApplicationTests.test_task_validation_post_put_boundaries_and_no_partial_update) ... ok
+test_user_and_category_validation_and_conflict (test_app.ApplicationTests.test_user_and_category_validation_and_conflict) ... ok
+
+----------------------------------------------------------------------
+Ran 16 tests in 5.673s
+
+OK

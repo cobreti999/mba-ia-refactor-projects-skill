@@ -1,0 +1,352 @@
+{
+  "runtime": "3.14.7",
+  "dependencies": {
+    "flask": "3.0.0",
+    "flask-sqlalchemy": "3.1.1",
+    "flask-cors": "4.0.0",
+    "sqlalchemy": "2.1.5",
+    "werkzeug": "3.1.9"
+  },
+  "method": "original copied application, Flask test client, isolated SQLite database",
+  "endpoints_verified": 22,
+  "requests": [
+    {
+      "method": "GET",
+      "path": "/",
+      "expected": 200,
+      "observed": 200,
+      "keys": [
+        "message",
+        "version"
+      ],
+      "items": null
+    },
+    {
+      "method": "GET",
+      "path": "/health",
+      "expected": 200,
+      "observed": 200,
+      "keys": [
+        "status",
+        "timestamp"
+      ],
+      "items": null
+    },
+    {
+      "method": "POST",
+      "path": "/users",
+      "expected": 201,
+      "observed": 201,
+      "keys": [
+        "active",
+        "created_at",
+        "email",
+        "id",
+        "name",
+        "password",
+        "role"
+      ],
+      "items": null
+    },
+    {
+      "method": "POST",
+      "path": "/login",
+      "expected": 200,
+      "observed": 200,
+      "keys": [
+        "message",
+        "token",
+        "user"
+      ],
+      "items": null
+    },
+    {
+      "method": "POST",
+      "path": "/categories",
+      "expected": 201,
+      "observed": 201,
+      "keys": [
+        "color",
+        "created_at",
+        "description",
+        "id",
+        "name"
+      ],
+      "items": null
+    },
+    {
+      "method": "POST",
+      "path": "/tasks",
+      "expected": 201,
+      "observed": 201,
+      "keys": [
+        "category_id",
+        "created_at",
+        "description",
+        "due_date",
+        "id",
+        "priority",
+        "status",
+        "tags",
+        "title",
+        "updated_at",
+        "user_id"
+      ],
+      "items": null
+    },
+    {
+      "method": "GET",
+      "path": "/tasks",
+      "expected": 200,
+      "observed": 200,
+      "keys": [
+        "category_id",
+        "category_name",
+        "created_at",
+        "description",
+        "due_date",
+        "id",
+        "overdue",
+        "priority",
+        "status",
+        "tags",
+        "title",
+        "updated_at",
+        "user_id",
+        "user_name"
+      ],
+      "items": 1
+    },
+    {
+      "method": "GET",
+      "path": "/tasks/1",
+      "expected": 200,
+      "observed": 200,
+      "keys": [
+        "category_id",
+        "created_at",
+        "description",
+        "due_date",
+        "id",
+        "overdue",
+        "priority",
+        "status",
+        "tags",
+        "title",
+        "updated_at",
+        "user_id"
+      ],
+      "items": null
+    },
+    {
+      "method": "GET",
+      "path": "/tasks/search?q=Baseline&priority=2",
+      "expected": 200,
+      "observed": 200,
+      "keys": [
+        "category_id",
+        "created_at",
+        "description",
+        "due_date",
+        "id",
+        "priority",
+        "status",
+        "tags",
+        "title",
+        "updated_at",
+        "user_id"
+      ],
+      "items": 1
+    },
+    {
+      "method": "GET",
+      "path": "/tasks/stats",
+      "expected": 200,
+      "observed": 200,
+      "keys": [
+        "cancelled",
+        "completion_rate",
+        "done",
+        "in_progress",
+        "overdue",
+        "pending",
+        "total"
+      ],
+      "items": null
+    },
+    {
+      "method": "GET",
+      "path": "/users",
+      "expected": 200,
+      "observed": 200,
+      "keys": [
+        "active",
+        "created_at",
+        "email",
+        "id",
+        "name",
+        "role",
+        "task_count"
+      ],
+      "items": 1
+    },
+    {
+      "method": "GET",
+      "path": "/users/1",
+      "expected": 200,
+      "observed": 200,
+      "keys": [
+        "active",
+        "created_at",
+        "email",
+        "id",
+        "name",
+        "password",
+        "role",
+        "tasks"
+      ],
+      "items": null
+    },
+    {
+      "method": "GET",
+      "path": "/users/1/tasks",
+      "expected": 200,
+      "observed": 200,
+      "keys": [
+        "created_at",
+        "description",
+        "due_date",
+        "id",
+        "overdue",
+        "priority",
+        "status",
+        "title"
+      ],
+      "items": 1
+    },
+    {
+      "method": "GET",
+      "path": "/reports/summary",
+      "expected": 200,
+      "observed": 200,
+      "keys": [
+        "generated_at",
+        "overdue",
+        "overview",
+        "recent_activity",
+        "tasks_by_priority",
+        "tasks_by_status",
+        "user_productivity"
+      ],
+      "items": null
+    },
+    {
+      "method": "GET",
+      "path": "/reports/user/1",
+      "expected": 200,
+      "observed": 200,
+      "keys": [
+        "statistics",
+        "user"
+      ],
+      "items": null
+    },
+    {
+      "method": "GET",
+      "path": "/categories",
+      "expected": 200,
+      "observed": 200,
+      "keys": [
+        "color",
+        "created_at",
+        "description",
+        "id",
+        "name",
+        "task_count"
+      ],
+      "items": 1
+    },
+    {
+      "method": "PUT",
+      "path": "/tasks/1",
+      "expected": 200,
+      "observed": 200,
+      "keys": [
+        "category_id",
+        "created_at",
+        "description",
+        "due_date",
+        "id",
+        "priority",
+        "status",
+        "tags",
+        "title",
+        "updated_at",
+        "user_id"
+      ],
+      "items": null
+    },
+    {
+      "method": "PUT",
+      "path": "/users/1",
+      "expected": 200,
+      "observed": 200,
+      "keys": [
+        "active",
+        "created_at",
+        "email",
+        "id",
+        "name",
+        "password",
+        "role"
+      ],
+      "items": null
+    },
+    {
+      "method": "PUT",
+      "path": "/categories/1",
+      "expected": 200,
+      "observed": 200,
+      "keys": [
+        "color",
+        "created_at",
+        "description",
+        "id",
+        "name"
+      ],
+      "items": null
+    },
+    {
+      "method": "DELETE",
+      "path": "/categories/1",
+      "expected": 200,
+      "observed": 200,
+      "keys": [
+        "message"
+      ],
+      "items": null
+    },
+    {
+      "method": "DELETE",
+      "path": "/tasks/1",
+      "expected": 200,
+      "observed": 200,
+      "keys": [
+        "message"
+      ],
+      "items": null
+    },
+    {
+      "method": "DELETE",
+      "path": "/users/1",
+      "expected": 200,
+      "observed": 200,
+      "keys": [
+        "message"
+      ],
+      "items": null
+    }
+  ],
+  "category_delete_unlinks_tasks": true,
+  "passed": true
+}

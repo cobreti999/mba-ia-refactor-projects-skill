@@ -1,0 +1,10 @@
+VALID_STATUSES = ('pending', 'in_progress', 'done', 'cancelled')
+VALID_ROLES = ('user', 'admin', 'manager')
+TEAM_ROLES = ('admin', 'manager')
+MIN_TITLE_LENGTH = 3
+MAX_TITLE_LENGTH = 200
+MIN_PASSWORD_LENGTH = 4
+MAX_PASSWORD_LENGTH = 128
+DEFAULT_PRIORITY = 3
+DEFAULT_COLOR = '#000000'
+MAX_ID = 2 ** 63 - 1

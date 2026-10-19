@@ -12,7 +12,7 @@ Ferramenta escolhida: **OpenAI Codex**. O repositório informado já é o fork d
 |---|---|
 | Requisito 1 — Análise Manual | Concluído |
 | Requisito 2 — Criação da Skill | Concluído: três fases implementadas e aprovadas |
-| Requisito 3 — Execução nos três projetos | Projetos 1 e 2 concluídos; projeto 3 pendente |
+| Requisito 3 — Execução nos três projetos | Concluído: três projetos refatorados e validados |
 
 O desenvolvimento para ao final de cada requisito e de cada fase da skill, aguardando um **ok explícito**. Na criação, serão entregues separadamente as fases Análise, Auditoria e Refatoração. Na execução, também haverá pausa entre as fases de cada projeto. A confirmação de uma etapa autoriza somente a próxima.
 
@@ -682,3 +682,21 @@ Antes: três fontes com AppManager concentrando banco, HTTP e regras. Depois: 14
 - [Estrutura antes/depois, contratos e comandos](ecommerce-api-legacy/README.md)
 
 Para reproduzir: Node >=22, recomendado 24; `cd ecommerce-api-legacy`, `npm ci`, configurar ambiente conforme README, `npm start`. Validar com `npm test` e `npm run test:http`. Banco em memória e pagamento simulado; sem validação de carga/serviços externos. O projeto 3 continua pendente e não foi iniciado nesta execução. Nenhum push, publicação ou PR realizado.
+
+## Resultados — Projeto 3 concluído
+
+A skill foi copiada integralmente para `task-manager-api/.agents/skills/refactor-arch/` e executada nesta conversa: Análise e Auditoria em sequência, Refatoração após a resposta explícita **“prossiga”**. A inspeção leu 15 fontes/1.158 linhas e inventariou 22 endpoints. A auditoria confirmou **12 findings (2 CRITICAL, 3 HIGH, 5 MEDIUM, 2 LOW)**, com correspondência aos **8/8 problemas manuais**; os 12 foram corrigidos.
+
+O projeto já tinha models úteis, preservados com o schema. As responsabilidades restantes foram separadas em factory/configuração, rotas/controllers, serviços, repositório, serializadores e autenticação/erros. Implementados tokens assinados/expiráveis, papéis e propriedade; scrypt e redefinição explícita das senhas MD5; transações, validação compartilhada, seed somente em banco vazio, agregações/joins e regra única de atraso. Importar não cria tabelas ou inicia servidor. SQLAlchemy legacy Query.get e datetime.utcnow foram substituídos sem mudar a representação UTC do banco.
+
+Deltas aprovados: autenticação e escopo por papel, cadastro público somente user, retirada de password das respostas, invalidação de tokens após reset/troca de senha, inicialização explícita e seed não destrutivo. Preservados os 22 caminhos/métodos, exclusão de usuário com suas tarefas e exclusão de categoria que desvincula/preserva tarefas. Migração de credenciais não apaga registros: contas MD5 exigem redefinição pelo CLI.
+
+**Validação:** original isolado com 22/22 endpoints; versão final com **16/16 testes e 44 cenários HTTP, 22/22 endpoints**, efeitos SQLite verificados e processo encerrado. Medição de queries com 25 relações adicionais: duas consultas em tasks/users/categories e cinco no resumo, incluindo autenticação. Instalação limpa pelo lockfile; Python 3.14.7, Flask 3.0.0, Flask-SQLAlchemy 3.1.1, SQLAlchemy 2.1.5. O projeto requer Python >=3.11. A prontidão HTTP precisou de prazo de 60 segundos devido à resolução reversa do ambiente, registrada nos artefatos; nenhuma alteração no DNS ou monkeypatch da aplicação foi usada. Sem teste de carga/implantação nem envio externo de notificações.
+
+- [Auditoria original, aprovação e rastreabilidade dos 12 achados](reports/audit-project-3.md)
+- [Caracterização dos 22 endpoints originais](reports/baseline-project-3.json)
+- [Matriz HTTP, efeitos, versões e hashes das fontes validadas](reports/validation-project-3.json)
+- [Saída real dos testes](reports/regression-project-3.txt)
+- [Arquitetura, permissões, inicialização, reset de credenciais e execução](task-manager-api/README.md)
+
+**Requisito 3 concluído:** skill executada nos três projetos, com auditorias, aprovação antes da refatoração, MVC, boot real e cobertura dos endpoints (19/19, 3/3 e 22/22). Cada projeto possui seu relatório e evidências. Os commits são locais; nenhum push, PR ou publicação foi realizado. A entrega para neste ponto para revisão.

@@ -1,0 +1,12 @@
+# Ambiente resolvido e validado em Python 3.14.7.
+Flask==3.0.0
+Flask-SQLAlchemy==3.1.1
+Flask-Cors==4.0.0
+SQLAlchemy==2.1.5
+Werkzeug==3.1.9
+itsdangerous==2.2.0
+click==8.5.0
+blinker==1.9.0
+Jinja2==3.1.6
+MarkupSafe==3.0.4
+typing_extensions==4.16.0

@@ -1,34 +1,45 @@
+import os
 from flask import Flask
 from flask_cors import CORS
+from sqlalchemy import event
+from config import load_config
 from database import db
-from routes.task_routes import task_bp
-from routes.user_routes import user_bp
-from routes.report_routes import report_bp
-import os, sys, json, datetime
+from http_support import register_errors
+from utils.clock import utc_now
 
-app = Flask(__name__)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///tasks.db'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SECRET_KEY'] = 'super-secret-key-123'
+def sqlite_constraints(connection, _record):
+    cursor = connection.cursor()
+    try:
+        cursor.execute('PRAGMA foreign_keys=ON')
+    finally:
+        cursor.close()
 
-CORS(app)
-db.init_app(app)
 
-app.register_blueprint(task_bp)
-app.register_blueprint(user_bp)
-app.register_blueprint(report_bp)
+def create_app(overrides=None):
+    app = Flask(__name__, static_folder=None)
+    app.config.update(load_config(overrides))
+    CORS(app, origins=app.config['CORS_ORIGINS'])
+    db.init_app(app)
+    with app.app_context():
+        if db.engine.dialect.name == 'sqlite':
+            event.listen(db.engine, 'connect', sqlite_constraints)
+    from routes.task_routes import blueprint as tasks
+    from routes.user_routes import blueprint as users
+    from routes.report_routes import blueprint as reports
+    from cli import register_commands
+    app.register_blueprint(tasks())
+    app.register_blueprint(users())
+    app.register_blueprint(reports())
+    register_errors(app)
+    register_commands(app)
+    app.add_url_rule('/', 'index', lambda: {'message': 'Task Manager API', 'version': '1.0'})
+    app.add_url_rule('/health', 'health', lambda: {'status': 'ok', 'timestamp': str(utc_now())})
+    return app
 
-@app.route('/health')
-def health():
-    return {'status': 'ok', 'timestamp': str(datetime.datetime.now())}
-
-@app.route('/')
-def index():
-    return {'message': 'Task Manager API', 'version': '1.0'}
-
-with app.app_context():
-    db.create_all()
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    port = int(os.environ.get('TASK_PORT', '5000'))
+    if not 0 <= port <= 65535:
+        raise RuntimeError('TASK_PORT deve estar entre 0 e 65535')
+    create_app().run(host=os.environ.get('TASK_HOST', '127.0.0.1'), port=port, debug=False, use_reloader=False)
