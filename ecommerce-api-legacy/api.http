@@ -1,31 +1,39 @@
-@baseUrl = http://localhost:3000
+@baseUrl = http://127.0.0.1:3000
+@adminToken = {{$processEnv ADMIN_TOKEN}}
+@demoPassword = {{$processEnv SEED_PASSWORD}}
 
-### Checkout - sucesso
+### Demo only. Export secrets and start with SEED_DEMO=true.
+### Checkout approved (synthetic card; never a real payment).
 POST {{baseUrl}}/api/checkout
 Content-Type: application/json
 
 {
-  "usr": "Guilherme",
-  "eml": "gui@fullcycle.com.br",
-  "pwd": "senhaforte",
+  "usr": "Synthetic Student",
+  "eml": "student@example.test",
+  "pwd": "{{demoPassword}}",
   "c_id": 2,
-  "card": "4111222233334444"
+  "card": "4000000000000000"
 }
 
-### Checkout - pagamento recusado
+### Simulated denial.
 POST {{baseUrl}}/api/checkout
 Content-Type: application/json
 
 {
-  "usr": "João",
-  "eml": "joao@teste.com",
-  "pwd": "123",
+  "usr": "Synthetic Denied Student",
+  "eml": "denied@example.test",
+  "pwd": "{{demoPassword}}",
   "c_id": 1,
-  "card": "5111222233334444"
+  "card": "5000000000000000"
 }
 
-### Relatório financeiro administrativo
+### Authorized financial report.
 GET {{baseUrl}}/api/admin/financial-report
+Authorization: Bearer {{adminToken}}
 
-### Deletar usuário
+### Enrolled demo user: 409, preserving history.
 DELETE {{baseUrl}}/api/users/1
+Authorization: Bearer {{adminToken}}
+
+### Without admin identity: 401.
+GET {{baseUrl}}/api/admin/financial-report

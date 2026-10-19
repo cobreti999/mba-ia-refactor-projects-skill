@@ -1,13 +1,17 @@
 {
   "name": "desafio-arquitetura-ia-boilerplate",
   "version": "1.0.0",
-  "description": "Boilerplate com código legado para refatoração",
+  "description": "LMS demo API com MVC, checkout transacional e SQLite em memória",
   "main": "src/app.js",
   "scripts": {
-    "start": "node src/app.js"
+    "start": "node src/server.js",
+    "test": "node --test tests/regression.test.js",
+    "test:http": "node tests/smoke-http.js"
   },
   "dependencies": {
-    "express": "^4.18.2",
-    "sqlite3": "^5.1.6"
-  }
+    "express": "4.22.1",
+    "better-sqlite3": "13.0.3"
+  },
+  "engines": { "node": ">=22" },
+  "private": true
 }

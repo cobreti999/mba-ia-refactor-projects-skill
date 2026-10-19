@@ -1,0 +1,125 @@
+{
+  "revision": "f4df2266e4952c10ca6b10e1fd2c487befd4f9d2",
+  "command": "node probe.cjs (loads unchanged src/app.js)",
+  "isolation": "temporary copy, in-memory SQLite, loopback ephemeral port; console.log/error suppressed before importing legacy code",
+  "runtime": "v20.11.1",
+  "cases": [
+    {
+      "name": "initial report",
+      "method": "GET",
+      "path": "/api/admin/financial-report",
+      "status": 200,
+      "body": [
+        {
+          "course": "Docker",
+          "revenue": 0,
+          "students": []
+        },
+        {
+          "course": "Clean Architecture",
+          "revenue": 997,
+          "students": [
+            {
+              "student": "Leonan",
+              "paid": 997
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "checkout approved",
+      "method": "POST",
+      "path": "/api/checkout",
+      "status": 200,
+      "body": {
+        "msg": "Sucesso",
+        "enrollment_id": 2
+      }
+    },
+    {
+      "name": "report after checkout",
+      "method": "GET",
+      "path": "/api/admin/financial-report",
+      "status": 200,
+      "body": [
+        {
+          "course": "Clean Architecture",
+          "revenue": 997,
+          "students": [
+            {
+              "student": "Leonan",
+              "paid": 997
+            }
+          ]
+        },
+        {
+          "course": "Docker",
+          "revenue": 497,
+          "students": [
+            {
+              "student": "Synthetic Student",
+              "paid": 497
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "checkout denied",
+      "method": "POST",
+      "path": "/api/checkout",
+      "status": 400,
+      "body": "Pagamento recusado"
+    },
+    {
+      "name": "missing fields",
+      "method": "POST",
+      "path": "/api/checkout",
+      "status": 400,
+      "body": "Bad Request"
+    },
+    {
+      "name": "delete enrolled synthetic user",
+      "method": "DELETE",
+      "path": "/api/users/2",
+      "status": 200,
+      "body": "Usuário deletado, mas as matrículas e pagamentos ficaram sujos no banco."
+    },
+    {
+      "name": "report after delete",
+      "method": "GET",
+      "path": "/api/admin/financial-report",
+      "status": 200,
+      "body": [
+        {
+          "course": "Clean Architecture",
+          "revenue": 997,
+          "students": [
+            {
+              "student": "Leonan",
+              "paid": 997
+            }
+          ]
+        },
+        {
+          "course": "Docker",
+          "revenue": 497,
+          "students": [
+            {
+              "student": "Unknown",
+              "paid": 497
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "port": 50166,
+  "pid": 95446,
+  "verified_endpoints": 3,
+  "passed": true,
+  "process_stopped": true,
+  "exit_code": -15,
+  "logs": "Legacy logs suppressed before import; no request credentials captured."
+}

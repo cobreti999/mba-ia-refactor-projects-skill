@@ -1,0 +1,483 @@
+{
+  "date": "2026-10-19T19:31:07.736Z",
+  "command": "npm run test:http -- <evidence-path>",
+  "runtime": "v24.22.0",
+  "express": "4.22.1",
+  "driver": {
+    "name": "better-sqlite3",
+    "version": "13.0.3"
+  },
+  "isolation": "in-memory databases, synthetic data, loopback ephemeral ports; no external payment calls",
+  "cases": [
+    {
+      "name": "report requires admin",
+      "method": "GET",
+      "path": "/api/admin/financial-report",
+      "expected": 401,
+      "observed": 401,
+      "body": {
+        "error": {
+          "code": "UNAUTHORIZED",
+          "message": "Credencial administrativa necessária"
+        }
+      }
+    },
+    {
+      "name": "report rejects incorrect admin",
+      "method": "GET",
+      "path": "/api/admin/financial-report",
+      "expected": 401,
+      "observed": 401,
+      "body": {
+        "error": {
+          "code": "UNAUTHORIZED",
+          "message": "Credencial administrativa necessária"
+        }
+      }
+    },
+    {
+      "name": "initial authorized report",
+      "method": "GET",
+      "path": "/api/admin/financial-report",
+      "expected": 200,
+      "observed": 200,
+      "body": [
+        {
+          "course": "Clean Architecture",
+          "revenue": 997,
+          "students": [
+            {
+              "student": "Demo Student",
+              "paid": 997
+            }
+          ]
+        },
+        {
+          "course": "Docker",
+          "revenue": 0,
+          "students": []
+        }
+      ]
+    },
+    {
+      "name": "new checkout commits",
+      "method": "POST",
+      "path": "/api/checkout",
+      "expected": 200,
+      "observed": 200,
+      "body": {
+        "msg": "Sucesso",
+        "enrollment_id": 2
+      }
+    },
+    {
+      "name": "existing user authenticates",
+      "method": "POST",
+      "path": "/api/checkout",
+      "expected": 200,
+      "observed": 200,
+      "body": {
+        "msg": "Sucesso",
+        "enrollment_id": 3
+      }
+    },
+    {
+      "name": "existing user wrong password",
+      "method": "POST",
+      "path": "/api/checkout",
+      "expected": 401,
+      "observed": 401,
+      "body": {
+        "error": {
+          "code": "INVALID_CREDENTIALS",
+          "message": "Credenciais inválidas"
+        }
+      }
+    },
+    {
+      "name": "denied payment",
+      "method": "POST",
+      "path": "/api/checkout",
+      "expected": 400,
+      "observed": 400,
+      "body": {
+        "error": {
+          "code": "PAYMENT_DENIED",
+          "message": "Pagamento recusado"
+        }
+      }
+    },
+    {
+      "name": "course missing",
+      "method": "POST",
+      "path": "/api/checkout",
+      "expected": 404,
+      "observed": 404,
+      "body": {
+        "error": {
+          "code": "COURSE_NOT_FOUND",
+          "message": "Curso não encontrado"
+        }
+      }
+    },
+    {
+      "name": "missing fields",
+      "method": "POST",
+      "path": "/api/checkout",
+      "expected": 400,
+      "observed": 400,
+      "body": {
+        "error": {
+          "code": "INVALID_INPUT",
+          "message": "Dados inválidos"
+        }
+      }
+    },
+    {
+      "name": "numeric card",
+      "method": "POST",
+      "path": "/api/checkout",
+      "expected": 400,
+      "observed": 400,
+      "body": {
+        "error": {
+          "code": "INVALID_INPUT",
+          "message": "Dados inválidos"
+        }
+      }
+    },
+    {
+      "name": "object card",
+      "method": "POST",
+      "path": "/api/checkout",
+      "expected": 400,
+      "observed": 400,
+      "body": {
+        "error": {
+          "code": "INVALID_INPUT",
+          "message": "Dados inválidos"
+        }
+      }
+    },
+    {
+      "name": "array body",
+      "method": "POST",
+      "path": "/api/checkout",
+      "expected": 400,
+      "observed": 400,
+      "body": {
+        "error": {
+          "code": "INVALID_INPUT",
+          "message": "Dados inválidos"
+        }
+      }
+    },
+    {
+      "name": "null body",
+      "method": "POST",
+      "path": "/api/checkout",
+      "expected": 400,
+      "observed": 400,
+      "body": {
+        "error": {
+          "code": "INVALID_JSON",
+          "message": "JSON inválido"
+        }
+      }
+    },
+    {
+      "name": "string course id",
+      "method": "POST",
+      "path": "/api/checkout",
+      "expected": 400,
+      "observed": 400,
+      "body": {
+        "error": {
+          "code": "INVALID_INPUT",
+          "message": "Dados inválidos"
+        }
+      }
+    },
+    {
+      "name": "missing password",
+      "method": "POST",
+      "path": "/api/checkout",
+      "expected": 400,
+      "observed": 400,
+      "body": {
+        "error": {
+          "code": "INVALID_INPUT",
+          "message": "Dados inválidos"
+        }
+      }
+    },
+    {
+      "name": "malformed JSON",
+      "method": "POST",
+      "path": "/api/checkout",
+      "expected": 400,
+      "observed": 400,
+      "body": {
+        "error": {
+          "code": "INVALID_JSON",
+          "message": "JSON inválido"
+        }
+      }
+    },
+    {
+      "name": "oversized JSON",
+      "method": "POST",
+      "path": "/api/checkout",
+      "expected": 413,
+      "observed": 413,
+      "body": {
+        "error": {
+          "code": "PAYLOAD_TOO_LARGE",
+          "message": "Corpo excede 16 KiB"
+        }
+      }
+    },
+    {
+      "name": "unsupported JSON charset",
+      "method": "POST",
+      "path": "/api/checkout",
+      "expected": 415,
+      "observed": 415,
+      "body": {
+        "error": {
+          "code": "UNSUPPORTED_ENCODING",
+          "message": "Codificação não suportada"
+        }
+      }
+    },
+    {
+      "name": "delete requires admin",
+      "method": "DELETE",
+      "path": "/api/users/1",
+      "expected": 401,
+      "observed": 401,
+      "body": {
+        "error": {
+          "code": "UNAUTHORIZED",
+          "message": "Credencial administrativa necessária"
+        }
+      }
+    },
+    {
+      "name": "delete rejects incorrect admin",
+      "method": "DELETE",
+      "path": "/api/users/1",
+      "expected": 401,
+      "observed": 401,
+      "body": {
+        "error": {
+          "code": "UNAUTHORIZED",
+          "message": "Credencial administrativa necessária"
+        }
+      }
+    },
+    {
+      "name": "delete enrolled user preserves history",
+      "method": "DELETE",
+      "path": "/api/users/1",
+      "expected": 409,
+      "observed": 409,
+      "body": {
+        "error": {
+          "code": "USER_ENROLLED",
+          "message": "Usuário possui matrículas"
+        }
+      }
+    },
+    {
+      "name": "delete missing user",
+      "method": "DELETE",
+      "path": "/api/users/999",
+      "expected": 404,
+      "observed": 404,
+      "body": {
+        "error": {
+          "code": "USER_NOT_FOUND",
+          "message": "Usuário não encontrado"
+        }
+      }
+    },
+    {
+      "name": "delete invalid id",
+      "method": "DELETE",
+      "path": "/api/users/abc",
+      "expected": 400,
+      "observed": 400,
+      "body": {
+        "error": {
+          "code": "INVALID_INPUT",
+          "message": "Dados inválidos"
+        }
+      }
+    },
+    {
+      "name": "report confirms only successful checkout effects",
+      "method": "GET",
+      "path": "/api/admin/financial-report",
+      "expected": 200,
+      "observed": 200,
+      "body": [
+        {
+          "course": "Clean Architecture",
+          "revenue": 997,
+          "students": [
+            {
+              "student": "Demo Student",
+              "paid": 997
+            }
+          ]
+        },
+        {
+          "course": "Docker",
+          "revenue": 994,
+          "students": [
+            {
+              "student": "HTTP Student",
+              "paid": 497
+            },
+            {
+              "student": "HTTP Student",
+              "paid": 497
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "delete unlinked fixture user succeeds",
+      "method": "DELETE",
+      "path": "/api/users/2",
+      "expected": 200,
+      "observed": 200,
+      "body": {
+        "msg": "Usuário deletado"
+      }
+    },
+    {
+      "name": "deleted user is now absent",
+      "method": "DELETE",
+      "path": "/api/users/2",
+      "expected": 404,
+      "observed": 404,
+      "body": {
+        "error": {
+          "code": "USER_NOT_FOUND",
+          "message": "Usuário não encontrado"
+        }
+      }
+    }
+  ],
+  "processes": [
+    {
+      "command": "node src/server.js",
+      "pid": 96184,
+      "logs": [
+        "{\"event\":\"ready\",\"host\":\"127.0.0.1\",\"port\":50259,\"pid\":96184}"
+      ],
+      "stopped": true,
+      "port": 50259,
+      "exitCode": 0,
+      "signal": null
+    },
+    {
+      "command": "node tests/http-fixture.js",
+      "pid": 96185,
+      "logs": [
+        "{\"event\":\"ready\",\"host\":\"127.0.0.1\",\"port\":50262,\"pid\":96185}"
+      ],
+      "stopped": true,
+      "port": 50262,
+      "exitCode": 0,
+      "signal": null
+    }
+  ],
+  "sqlite": "3.53.4",
+  "httpEffects": {
+    "successfulNewUserEnrollments": 2,
+    "course2Revenue": 994,
+    "originalHistoryPreserved": true
+  },
+  "deleteDatabaseEffects": {
+    "users": 1,
+    "unlinked": 0,
+    "foreignKeyErrors": 0
+  },
+  "verifiedEndpoints": 3,
+  "passed": true,
+  "logsContainSecrets": false,
+  "regression": {
+    "command": "npm test",
+    "tests": 16,
+    "passed": 16,
+    "failed": 0,
+    "exit_code": 0,
+    "transcript": "regression-project-2.txt"
+  },
+  "installation": {
+    "command": "npm ci --offline --no-audit --no-fund --cache <temporary-cache>",
+    "packages": 70,
+    "exit_code": 0,
+    "npm": "10.2.4",
+    "deprecated_lock_entries": 0
+  },
+  "earlier_attempts": [
+    {
+      "phase": "baseline install",
+      "result": "sandbox DNS ENOTFOUND; approved network retry passed"
+    },
+    {
+      "phase": "baseline boot",
+      "result": "sandbox EPERM on loopback listener; approved retry passed"
+    },
+    {
+      "phase": "initial regression",
+      "passed": 13,
+      "failed": 3,
+      "resolution": "Two listener tests required approved sandbox escalation; one assertion corrected to accept SQLite RESTRICT constraint subtype while checking foreign-key failure. Final 16/16 passed."
+    }
+  ],
+  "findings": {
+    "F-001": "corrigido",
+    "F-002": "corrigido",
+    "F-003": "corrigido",
+    "F-004": "corrigido",
+    "F-005": "corrigido",
+    "F-006": "corrigido",
+    "F-007": "corrigido",
+    "F-008": "corrigido",
+    "F-009": "corrigido",
+    "F-010": "corrigido",
+    "F-011": "corrigido",
+    "F-012": "corrigido",
+    "F-013": "corrigido"
+  },
+  "source_sha256": {
+    "package-lock.json": "939edcc78183dafd7b98e4480223ca724c1d0d101e84840fe829f466ffdd2880",
+    "package.json": "aaf596cabf98e89e450c3fc8e1d4b1ce93b0edef4876161b6a845e5b87d9c18f",
+    "src/app.js": "86f06a7b867f02b5f4fa6ef31f2b00eda48c4ba5f82c50e3825ec8f4748d7144",
+    "src/config/index.js": "ef84b43a9da0c5a523812072a5d050fa6603361081fb8808180a450c06767313",
+    "src/controllers/index.js": "5644b8b83cc608fb7e3b19f585fca968d11a378e7504007790dfb282c32ca788",
+    "src/controllers/validation.js": "921e5c1733205f4df8258a959fb17375257e1df390245b73551aa9e6b222b08f",
+    "src/database/index.js": "0014ee7f620ad59e37f6c2f7488b141e9444c99e1bd44d125e55c5c2641b51c1",
+    "src/middleware/auth.js": "34d810005aa81786773cc5a7551f6f9b6e2596efca54140813b3f9f9e05e8f66",
+    "src/middleware/errors.js": "4c7bcb3f4a57bb32bdf1f5d29b800e4d60cdc242d66a01838276e88348b74cee",
+    "src/models/index.js": "2a55cecc9dc0674b967c4f306ad3c788ffab9ebcff71019a1aa5bd17ec3163d3",
+    "src/routes/index.js": "761f3316a719a9d2f23d46c736641ad826027370c9bcbf82cca98dac51ba5a41",
+    "src/security/passwords.js": "3ee1d4a7729405d88a73a86a4fe84e2e3d21d16b0964967946310b7ce73c3b68",
+    "src/server.js": "ac61018b26207efc3966143a6418a30b4ee7d21a9572815c6bdc476a757d1b75",
+    "src/services/errors.js": "cf50409202579a6aa553e3d45ca1f236b36b090ca1931ba877b5caf8ad85d5f0",
+    "src/services/index.js": "2d491c0d4013d4642c9ecb54430d2b8d5927fbec08f68edc787becb2c7a678e6",
+    "src/services/payment.js": "7bce5f7637d37d66f9e0a808db24b779d2ae74fbb0a199dba22883cf309a8b96"
+  },
+  "limitations": [
+    "Demo payment only; no external charges",
+    "In-memory SQLite; no durable database migrated",
+    "Local functional validation, not production load or complete supply-chain vulnerability audit",
+    "Existing legacy credentials were not revoked against external services"
+  ]
+}

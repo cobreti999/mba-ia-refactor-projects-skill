@@ -12,7 +12,7 @@ Ferramenta escolhida: **OpenAI Codex**. O repositório informado já é o fork d
 |---|---|
 | Requisito 1 — Análise Manual | Concluído |
 | Requisito 2 — Criação da Skill | Concluído: três fases implementadas e aprovadas |
-| Requisito 3 — Execução nos três projetos | Projeto 1 concluído; projetos 2 e 3 pendentes |
+| Requisito 3 — Execução nos três projetos | Projetos 1 e 2 concluídos; projeto 3 pendente |
 
 O desenvolvimento para ao final de cada requisito e de cada fase da skill, aguardando um **ok explícito**. Na criação, serão entregues separadamente as fases Análise, Auditoria e Refatoração. Na execução, também haverá pausa entre as fases de cada projeto. A confirmação de uma etapa autoriza somente a próxima.
 
@@ -104,7 +104,7 @@ A aplicação mantém Flask e SQLite, agora com rotas, controllers, serviços, r
 - [Arquitetura, migração, execução e matriz de acesso](code-smells-project/README.md)
 - [Testes de regressão](code-smells-project/tests/test_app.py) e [teste HTTP real](code-smells-project/tests/smoke_http.py)
 
-Os projetos 2 e 3 ainda não foram refatorados. A próxima etapa depende da revisão desta entrega.
+O projeto 2 foi concluído na execução registrada em Resultados abaixo. O projeto 3 permanece pendente de revisão explícita.
 
 ## Construção da Skill
 
@@ -666,3 +666,19 @@ A skill deve atingir os seguintes mínimos em **todos os 3 projetos**:
 - **Projetos diferentes exigem adaptação** — a Fase 3 de um projeto já parcialmente organizado não vai ter as mesmas transformações de um monolito. Sua skill deve se adaptar ao contexto.
 - **Pedir confirmação na Fase 2 é obrigatório** — o humano deve revisar o relatório antes de qualquer modificação.
 - **Consulte as referências do curso** — revise a documentação oficial da ferramenta escolhida e os materiais das aulas para relembrar a estrutura e anatomia de uma skill.
+
+## Resultados — Projeto 2 concluído
+
+A skill refactor-arch foi executada em ecommerce-api-legacy: Análise e Auditoria em sequência no console e Refatoração somente após resposta real `y`. A auditoria encontrou **13 findings (4 CRITICAL, 2 HIGH, 5 MEDIUM, 2 LOW)**, com correspondência aos **8/8 problemas manuais**; os 13 foram corrigidos.
+
+Antes: três fontes com AppManager concentrando banco, HTTP e regras. Depois: 14 fontes com composição/configuração, models, routes, controllers, serviços, autenticação, erros e scrypt. Node/Express/SQLite preservados; driver sqlite3 deprecated substituído por better-sqlite3 13.0.3. Deltas aprovados: credencial administrativa no relatório/DELETE, senha obrigatória/verificada no checkout, erros JSON, DELETE restrito por vínculos, validação e transações.
+
+**Validação:** baseline original com sete cenários/3 endpoints; resultado final **16/16 testes e 26 cenários HTTP, 3/3 endpoints**, processos encerrados e logs sem segredos. Instalação reprodutível pelo lockfile; Node 24.22.0 temporário, Express 4.22.1. Checklist do projeto: stack/domínio/inventário, auditoria com linhas e APIs oficiais, aprovação, MVC/configuração/erros, boot e endpoints verificados.
+
+- [Auditoria original aprovada e rastreabilidade final](reports/audit-project-2.md)
+- [Baseline HTTP](reports/baseline-project-2.json)
+- [Matriz HTTP, versões, efeitos e logs](reports/validation-project-2.json)
+- [Saída real dos testes](reports/regression-project-2.txt)
+- [Estrutura antes/depois, contratos e comandos](ecommerce-api-legacy/README.md)
+
+Para reproduzir: Node >=22, recomendado 24; `cd ecommerce-api-legacy`, `npm ci`, configurar ambiente conforme README, `npm start`. Validar com `npm test` e `npm run test:http`. Banco em memória e pagamento simulado; sem validação de carga/serviços externos. O projeto 3 continua pendente e não foi iniciado nesta execução. Nenhum push, publicação ou PR realizado.

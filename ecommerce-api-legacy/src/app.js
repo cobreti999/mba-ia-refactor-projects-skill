@@ -1,14 +1,24 @@
 const express = require('express');
-const AppManager = require('./AppManager');
-const { config } = require('./utils');
+const { createControllers } = require('./controllers');
+const { registerRoutes } = require('./routes');
+const { createServices } = require('./services');
+const { createRepository } = require('./models');
+const passwords = require('./security/passwords');
+const { requireAdmin } = require('./middleware/auth');
+const { errorHandler } = require('./middleware/errors');
+const { AppError } = require('./services/errors');
 
-const app = express();
-app.use(express.json());
+// Importing this module opens neither a database nor an HTTP listener.
+function createApp({ database, config, logger = console, paymentGateway }) {
+    const app = express();
+    app.disable('x-powered-by');
+    app.use(express.json({ limit: '16kb' }));
+    const repository = createRepository(database);
+    const services = createServices({ repository, passwords, paymentGateway });
+    registerRoutes(app, createControllers(services), requireAdmin(config.adminToken));
+    app.use((req, res, next) => next(new AppError('NOT_FOUND', 'Recurso não encontrado', 404)));
+    app.use(errorHandler(logger));
+    return app;
+}
 
-const manager = new AppManager();
-manager.initDb();
-manager.setupRoutes(app);
-
-app.listen(config.port, () => {
-    console.log(`Frankenstein LMS rodando na porta ${config.port}...`);
-});
+module.exports = { createApp };

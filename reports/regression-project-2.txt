@@ -1,0 +1,27 @@
+> desafio-arquitetura-ia-boilerplate@1.0.0 test
+> node --test tests/regression.test.js
+
+✔ scrypt uses independent salts, verifies credentials and rejects legacy formats (226.736709ms)
+✔ config requires explicit credentials and bounded valid options (0.423125ms)
+✔ validation handles types, boundaries, normalization and public keys (1.734708ms)
+✔ checkout commits user, enrollment, payment and audit with original response semantics (515.428333ms)
+✔ denied payment, invalid credentials and missing/inactive courses leave no writes (112.541208ms)
+✔ rollback leaves all tables unchanged when users insertion fails (112.190875ms)
+✔ rollback leaves all tables unchanged when enrollments insertion fails (111.949458ms)
+✔ rollback leaves all tables unchanged when payments insertion fails (111.638583ms)
+✔ rollback leaves all tables unchanged when audit_logs insertion fails (111.312083ms)
+✔ concurrent signup cannot create duplicate identities or partial transactions (178.419459ms)
+✔ delete preserves enrolled users and history; nonexistent and unlinked users have distinct outcomes (111.84125ms)
+✔ report preserves empty courses, unpaid enrollment, denied amount and deterministic ordering in one statement (57.628292ms)
+✔ independent app databases do not share mutable state (167.662542ms)
+✔ schema initialization failure and listener failure close resources without a ready event (9.606375ms)
+✔ HTTP error boundary sanitizes malformed JSON, DB failures and credentials; DELETE success checked against DB (211.126833ms)
+✔ missing boot configuration fails clearly, and importing app has no listener or seed effects (125.164334ms)
+ℹ tests 16
+ℹ suites 0
+ℹ pass 16
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2254.954125
