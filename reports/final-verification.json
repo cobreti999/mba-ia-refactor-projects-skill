@@ -5,8 +5,9 @@
     "url": "https://github.com/cobreti999/mba-ia-refactor-projects-skill",
     "visibility_verified": "public",
     "default_branch_verified": "main",
-    "push_permission_verified": true,
-    "verification": "GitHub connector metadata and git fetch origin"
+    "push_permission_verified": false,
+    "verification": "GitHub metadata confirms public repo and account role; effective write authentication denied by HTTPS and connector.",
+    "account_push_role_reported": true
   },
   "manual_findings": {
     "1": {
@@ -204,5 +205,26 @@
   "limitations": [
     "Local functional validation; no production deployment, load test or comprehensive dependency vulnerability audit.",
     "Existing passwords require the documented explicit migration/reset; no user data was migrated during this check."
-  ]
+  ],
+  "publication": {
+    "status": "blocked_authentication",
+    "target": "origin/main",
+    "local_delivery_commit": "15bd66d",
+    "remote_changed": false,
+    "attempts": [
+      {
+        "transport": "git HTTPS",
+        "result": "403 Permission denied"
+      },
+      {
+        "transport": "GitHub connector write API",
+        "result": "403 Resource not accessible by integration"
+      },
+      {
+        "transport": "existing SSH keys with strict host checking",
+        "result": "Permission denied (publickey)"
+      }
+    ],
+    "required_action": "Authenticate Git with write access to cobreti999/mba-ia-refactor-projects-skill, then run git push origin main. No force push needed."
+  }
 }

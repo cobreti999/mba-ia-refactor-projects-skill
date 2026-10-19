@@ -238,6 +238,8 @@ Execute cada comando na pasta indicada e no seu runtime/venv. Os READMEs contêm
 
 ## Resultados — conferência final do desafio
 
+**Publicação pendente:** as entregas foram verificadas e commitadas na main local, mas o GitHub recusou o push por autenticação. Após habilitar uma credencial de escrita para este fork, execute `git push origin main`. Detalhes e tentativas estão no [relatório final](reports/final-verification.md).
+
 | Projeto | CRITICAL | HIGH | MEDIUM | LOW | Total corrigido | Correspondência manual | Regressões | Endpoints reais |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
 | code-smells-project | 4 | 4 | 4 | 2 | 14/14 | 9/9 | 12/12 | 19/19 |
