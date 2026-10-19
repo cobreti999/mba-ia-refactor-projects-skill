@@ -1,10 +1,10 @@
 # Conferência final dos requisitos do desafio
 
-Data: 19/10/2026. Ferramenta: OpenAI Codex. Escopo: entregas do fork `cobreti999/mba-ia-refactor-projects-skill`, sem criação de novo fork. O conector GitHub confirmou repositório público, branch padrão main e papel de escrita da conta; a credencial efetiva, porém, não autorizou a publicação (detalhes abaixo).  `git fetch origin` confirmou que o histórico remoto admite fast-forward a partir das entregas locais.
+Data: 19/10/2026. Ferramenta: OpenAI Codex. Escopo: entregas do fork `cobreti999/mba-ia-refactor-projects-skill`, sem criação de novo fork. O conector GitHub confirmou repositório público, branch padrão main e papel de escrita da conta; a publicação inicialmente foi bloqueada pela credencial efetiva e depois concluída após a correção da autenticação (detalhes abaixo).  `git fetch origin` confirmou que o histórico remoto admite fast-forward a partir das entregas locais.
 
 ## Resultado
 
-**Os critérios de implementação e validação foram atendidos localmente nos três projetos. A publicação das entregas no fork permanece pendente por autenticação.** A conferência final repetiu as suítes e os fluxos HTTP, verificou os artefatos de auditoria e completou a documentação consolidada. Resultado: **44 testes aprovados, 94 cenários HTTP aprovados, 44/44 endpoints exercitados e 39 achados corrigidos no escopo aprovado**.
+**Os critérios de implementação e validação foram atendidos localmente nos três projetos. As entregas foram publicadas em origin/main após a correção da autenticação.** A conferência final repetiu as suítes e os fluxos HTTP, verificou os artefatos de auditoria e completou a documentação consolidada. Resultado: **44 testes aprovados, 94 cenários HTTP aprovados, 44/44 endpoints exercitados e 39 achados corrigidos no escopo aprovado**.
 
 | Requisito | Resultado | Evidência |
 |---|---|---|
@@ -25,7 +25,7 @@ Data: 19/10/2026. Ferramenta: OpenAI Codex. Escopo: entregas do fork `cobreti999
 | README com processo/resultados/checklists/comandos | Completado na conferência final, incluindo cada alvo e matriz de aceite | README da raiz e READMEs das aplicações |
 | Commits por projeto | f4df226, ecc6ca0 e c1583bc; fechamento documental em commit posterior | Histórico Git |
 
-A entrega final preserva o histórico original. O commit de fechamento reúne também os ajustes do fluxo da skill e a documentação que haviam ficado pendentes; a main local foi atualizada por fast-forward, sem reescrever histórico. O push solicitado foi tentado, mas não concluído por falta de autorização efetiva de escrita.
+A entrega final preserva o histórico original. O commit de fechamento reúne também os ajustes do fluxo da skill e a documentação que haviam ficado pendentes; a main local foi atualizada por fast-forward, sem reescrever histórico. O push solicitado foi concluído após a correção da autenticação, por fast-forward e sem sobrescrever commits remotos.
 
 ## Verificações repetidas
 
@@ -52,12 +52,14 @@ A primeira tentativa final da suíte Node teve 14 sucessos e dois bloqueios EPER
 Conferência de requisitos e validação funcional local; não é implantação nem teste de carga ou auditoria universal de segurança/dependências. Os 39 achados apresentados e aprovados foram tratados, sem alegação de “zero problemas possíveis”. Alterações de contrato foram documentadas e aprovadas, incluindo autenticação e retirada de credenciais. Os caminhos originais continuam disponíveis, com os controles novos. Nenhum banco do usuário foi apagado ou migrado nesta validação. Senhas legadas exigem os comandos de migração/reset documentados antes do uso de bancos existentes. Nenhuma mensagem externa, cobrança ou publicação de aplicação foi executada.
 
 
-## Publicação — bloqueada pela autenticação
+## Publicação — concluída
 
-Os commits de implementação f4df226, ecc6ca0, c1583bc e de fechamento 15bd66d estão na main local. O diretório de trabalho ficou sem alterações pendentes após os commits. Nenhum commit remoto foi sobrescrito.
+Os commits de implementação f4df226, ecc6ca0, c1583bc e de fechamento 15bd66d foram publicados em origin/main, junto com o registro 9acc296 da tentativa inicial. O diretório de trabalho ficou sem alterações pendentes após os commits. Nenhum commit remoto foi sobrescrito.
+
+Tentativas iniciais, antes da correção da autenticação:
 
 - Git HTTPS: 403, permissão negada ao usuário proprietário.
 - API de escrita pelo conector GitHub: 403, Resource not accessible by integration. Ter papel de escrita nos metadados do repositório não garante que a credencial da integração tenha escopo de escrita de conteúdo.
 - SSH com chaves existentes e verificação estrita do host: Permission denied (publickey).
 
-É necessário autenticar o Git com uma credencial autorizada a escrever no fork. Depois, na raiz do repositório, executar `git push origin main`. Não usar force push. A revisão funcional está concluída; o envio não foi declarado como sucesso e depende dessa ação de autenticação.
+Após a correção da autenticação, `git push origin main` terminou com sucesso: `6d1ce62..9acc296 main -> main`. As três entregas e a conferência final estão no GitHub. Esta atualização documental registra a resolução do bloqueio em um commit adicional, sem force push.
