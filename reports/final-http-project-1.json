@@ -1,0 +1,273 @@
+{
+  "python": "3.14.7",
+  "dependencies": {
+    "flask": "3.1.1",
+    "flask-cors": "5.0.1",
+    "werkzeug": "3.1.9",
+    "itsdangerous": "2.2.0"
+  },
+  "boot": {
+    "command": "python app.py",
+    "host": "127.0.0.1",
+    "port": 50702,
+    "ready": true,
+    "process_stopped": true
+  },
+  "endpoints_verified": 19,
+  "requests": [
+    {
+      "method": "GET",
+      "path": "/",
+      "expected": 200,
+      "observed": 200,
+      "keys": [
+        "endpoints",
+        "mensagem",
+        "versao"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/health",
+      "expected": 200,
+      "observed": 200,
+      "keys": [
+        "counts",
+        "database",
+        "status",
+        "versao"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/login",
+      "expected": 200,
+      "observed": 200,
+      "keys": [
+        "dados",
+        "expires_in",
+        "mensagem",
+        "sucesso",
+        "token"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/usuarios",
+      "expected": 201,
+      "observed": 201,
+      "keys": [
+        "dados",
+        "sucesso"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/login",
+      "expected": 200,
+      "observed": 200,
+      "keys": [
+        "dados",
+        "expires_in",
+        "mensagem",
+        "sucesso",
+        "token"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/produtos",
+      "expected": 201,
+      "observed": 201,
+      "keys": [
+        "dados",
+        "mensagem",
+        "sucesso"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/produtos",
+      "expected": 200,
+      "observed": 200,
+      "keys": [
+        "dados",
+        "sucesso"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/produtos/busca",
+      "expected": 200,
+      "observed": 200,
+      "keys": [
+        "dados",
+        "sucesso",
+        "total"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/produtos/<int:id>",
+      "expected": 200,
+      "observed": 200,
+      "keys": [
+        "dados",
+        "sucesso"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/produtos/<int:id>",
+      "expected": 200,
+      "observed": 200,
+      "keys": [
+        "mensagem",
+        "sucesso"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/usuarios",
+      "expected": 200,
+      "observed": 200,
+      "keys": [
+        "dados",
+        "sucesso"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/usuarios/<int:id>",
+      "expected": 200,
+      "observed": 200,
+      "keys": [
+        "dados",
+        "sucesso"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/pedidos",
+      "expected": 201,
+      "observed": 201,
+      "keys": [
+        "dados",
+        "mensagem",
+        "sucesso"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/pedidos",
+      "expected": 200,
+      "observed": 200,
+      "keys": [
+        "dados",
+        "sucesso"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/pedidos/usuario/<int:usuario_id>",
+      "expected": 200,
+      "observed": 200,
+      "keys": [
+        "dados",
+        "sucesso"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/pedidos/<int:pedido_id>/status",
+      "expected": 200,
+      "observed": 200,
+      "keys": [
+        "mensagem",
+        "sucesso"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/relatorios/vendas",
+      "expected": 200,
+      "observed": 200,
+      "keys": [
+        "dados",
+        "sucesso"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/admin/query",
+      "expected": 200,
+      "observed": 200,
+      "keys": [
+        "dados",
+        "sucesso"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/usuarios",
+      "expected": 401,
+      "observed": 401,
+      "keys": [
+        "erro",
+        "sucesso"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/usuarios",
+      "expected": 403,
+      "observed": 403,
+      "keys": [
+        "erro",
+        "sucesso"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/usuarios/<int:id>",
+      "expected": 403,
+      "observed": 403,
+      "keys": [
+        "erro",
+        "sucesso"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/admin/query",
+      "expected": 400,
+      "observed": 400,
+      "keys": [
+        "erro",
+        "sucesso"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/produtos/<int:id>",
+      "expected": 200,
+      "observed": 200,
+      "keys": [
+        "mensagem",
+        "sucesso"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/admin/reset-db",
+      "expected": 200,
+      "observed": 200,
+      "keys": [
+        "mensagem",
+        "sucesso"
+      ]
+    }
+  ],
+  "database_effects_verified": true,
+  "server_log": " * Serving Flask app 'loja'\n * Debug mode: off\n\u001b[31m\u001b[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.\u001b[0m\n * Running on http://127.0.0.1:50702\n\u001b[33mPress CTRL+C to quit\u001b[0m\n127.0.0.1 - - [19/Oct/2026 17:27:43] \"GET / HTTP/1.1\" 200 -\n127.0.0.1 - - [19/Oct/2026 17:27:43] \"GET / HTTP/1.1\" 200 -\n127.0.0.1 - - [19/Oct/2026 17:27:43] \"GET /health HTTP/1.1\" 200 -\n127.0.0.1 - - [19/Oct/2026 17:27:43] \"POST /login HTTP/1.1\" 200 -\n127.0.0.1 - - [19/Oct/2026 17:27:44] \"\u001b[35m\u001b[1mPOST /usuarios HTTP/1.1\u001b[0m\" 201 -\n127.0.0.1 - - [19/Oct/2026 17:27:44] \"POST /login HTTP/1.1\" 200 -\n127.0.0.1 - - [19/Oct/2026 17:27:44] \"\u001b[35m\u001b[1mPOST /produtos HTTP/1.1\u001b[0m\" 201 -\n127.0.0.1 - - [19/Oct/2026 17:27:44] \"GET /produtos HTTP/1.1\" 200 -\n127.0.0.1 - - [19/Oct/2026 17:27:44] \"GET /produtos/busca?q=Livro HTTP/1.1\" 200 -\n127.0.0.1 - - [19/Oct/2026 17:27:44] \"GET /produtos/1 HTTP/1.1\" 200 -\n127.0.0.1 - - [19/Oct/2026 17:27:44] \"PUT /produtos/1 HTTP/1.1\" 200 -\n127.0.0.1 - - [19/Oct/2026 17:27:44] \"GET /usuarios HTTP/1.1\" 200 -\n127.0.0.1 - - [19/Oct/2026 17:27:44] \"GET /usuarios/2 HTTP/1.1\" 200 -\n127.0.0.1 - - [19/Oct/2026 17:27:44] \"\u001b[35m\u001b[1mPOST /pedidos HTTP/1.1\u001b[0m\" 201 -\n127.0.0.1 - - [19/Oct/2026 17:27:44] \"GET /pedidos HTTP/1.1\" 200 -\n127.0.0.1 - - [19/Oct/2026 17:27:44] \"GET /pedidos/usuario/2 HTTP/1.1\" 200 -\n127.0.0.1 - - [19/Oct/2026 17:27:44] \"PUT /pedidos/1/status HTTP/1.1\" 200 -\n127.0.0.1 - - [19/Oct/2026 17:27:44] \"GET /relatorios/vendas HTTP/1.1\" 200 -\n127.0.0.1 - - [19/Oct/2026 17:27:44] \"POST /admin/query HTTP/1.1\" 200 -\n127.0.0.1 - - [19/Oct/2026 17:27:44] \"\u001b[31m\u001b[1mGET /usuarios HTTP/1.1\u001b[0m\" 401 -\n127.0.0.1 - - [19/Oct/2026 17:27:44] \"\u001b[31m\u001b[1mGET /usuarios HTTP/1.1\u001b[0m\" 403 -\n127.0.0.1 - - [19/Oct/2026 17:27:44] \"\u001b[31m\u001b[1mGET /usuarios/1 HTTP/1.1\u001b[0m\" 403 -\n127.0.0.1 - - [19/Oct/2026 17:27:44] \"\u001b[31m\u001b[1mPOST /admin/query HTTP/1.1\u001b[0m\" 400 -\n127.0.0.1 - - [19/Oct/2026 17:27:44] \"DELETE /produtos/1 HTTP/1.1\" 200 -\n127.0.0.1 - - [19/Oct/2026 17:27:44] \"POST /admin/reset-db HTTP/1.1\" 200 -\n"
+}

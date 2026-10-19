@@ -2,7 +2,7 @@
 
 ## Regras de preenchimento
 
-Produza Markdown na conversa antes de qualquer escrita. Preencha todos os campos aplicáveis; use “não verificado” ou “não aplicável” com motivo, sem inventar resultados. O relatório cobre a revisão e as alterações locais observadas, não apenas o commit base.
+Apresente o relatório na sessão ativa antes de qualquer escrita; no CLI, use o console. Preencha todos os campos aplicáveis; use “não verificado” ou “não aplicável” com motivo, sem inventar resultados. O relatório cobre a revisão e as alterações locais observadas, não apenas o commit base.
 
 Use IDs únicos `F-001`, `F-002` etc. Ordene CRITICAL → HIGH → MEDIUM → LOW; dentro da severidade, priorize impacto e use caminho/linha como desempate. Preserve IDs ao revisar o mesmo relatório. Conte findings distintos, não linhas, ocorrências ou itens do catálogo. Os totais devem coincidir com as seções detalhadas; candidatos pendentes não entram na soma.
 
@@ -99,6 +99,6 @@ Marque os itens do checklist apenas após conferi-los. Remova instruções do te
 
 ## Salvamento após revisão
 
-Se o usuário solicitar um arquivo, mostre o relatório primeiro e peça confirmação para a escrita no destino exato. No desafio, os destinos serão `reports/audit-project-1.md`, `reports/audit-project-2.md` e `reports/audit-project-3.md`, relativos à raiz do repositório, conforme o projeto — não relativos à pasta da skill. Em outros projetos, use o destino informado, sem assumir essa numeração.
+Se o usuário solicitar um arquivo, mostre o relatório primeiro e informe o destino exato. Quando o relatório integrar a entrega da Fase 3, o prompt `[y/n]` do `SKILL.md` pode autorizar conjuntamente salvamento e refatoração, desde que isso seja explicitado antes da pergunta. Uma solicitação de somente salvamento não autoriza refatorar. No desafio, os destinos serão `reports/audit-project-1.md`, `reports/audit-project-2.md` e `reports/audit-project-3.md`, relativos à raiz do repositório, conforme o projeto — não relativos à pasta da skill. Em outros projetos, use o destino informado, sem assumir essa numeração.
 
-A confirmação de salvamento autoriza apenas esse artefato. Verifique se já existe e apresente a substituição proposta antes de sobrescrever conteúdo. Após salvar, atualize somente o estado do relatório com a decisão real; não inferir aprovação de refatoração a partir do salvamento; registrar apenas a decisão explícita, se houver. Não criar ou alterar código, configurações ou dados por consequência do salvamento.
+Quando a autorização for apenas de salvamento, ela autoriza somente esse artefato. Verifique se já existe e apresente a substituição proposta antes de sobrescrever conteúdo. Após salvar, atualize somente o estado do relatório com a decisão real; não inferir aprovação de refatoração a partir do salvamento; registrar apenas a decisão explícita, se houver. Não criar ou alterar código, configurações ou dados por consequência de uma autorização apenas de salvamento; a confirmação conjunta segue o escopo informado no SKILL.md.

@@ -7,7 +7,7 @@ description: Analise, audite e refatore projetos legados para MVC em diferentes 
 
 ## Escopo e fases
 
-Execute Análise → Auditoria → Refatoração MVC, com pausa para revisão entre as fases. As três fases estão disponíveis; implementar a skill não equivale a executá-la em um projeto.
+Execute Análise → Auditoria em sequência e peça confirmação antes da Refatoração MVC. Respeite uma solicitação explícita para executar somente uma fase ou pausar antes. As três fases estão disponíveis; implementar a skill não equivale a executá-la em um projeto.
 
 | Fase | Estado | Entrega |
 |---|---|---|
@@ -31,17 +31,17 @@ Leia [references/project-analysis.md](references/project-analysis.md) e siga sua
 4. Liste os endpoints e os contratos observáveis, as tabelas/entidades e os comandos existentes de inicialização e teste. Cite arquivos e linhas. Indique lacunas, comportamento dinâmico não resolvido e divergências entre documentação e código.
 5. Imprima o resumo no formato da referência. A conclusão desta fase exige stack, domínio, arquitetura, contagem verificável, mapa de responsabilidades e limitações explícitas. Se faltar evidência, registre a análise como parcial e identifique o que falta.
 
-Faça uma inspeção estática: leia arquivos e use ferramentas de busca/listagem. Não instale dependências, importe módulos da aplicação, inicie servidores, execute seeds/migrations/testes ou abra bancos existentes nesta fase. Essas ações podem alterar dados mesmo quando parecem apenas inspecionar o projeto. Não crie relatórios em disco nem modifique arquivos durante a execução da Fase 1; apresente a saída na conversa. Não reproduza valores de senhas, tokens ou chaves encontrados no código.
+Faça uma inspeção estática: leia arquivos e use ferramentas de busca/listagem. Não instale dependências, importe módulos da aplicação, inicie servidores, execute seeds/migrations/testes ou abra bancos existentes nesta fase. Essas ações podem alterar dados mesmo quando parecem apenas inspecionar o projeto. Não crie relatórios em disco nem modifique arquivos durante a execução da Fase 1; apresente a saída na sessão ativa (console no CLI, conversa no aplicativo). Não reproduza valores de senhas, tokens ou chaves encontrados no código.
 
 A análise descreve a estrutura atual; classificação de severidade e recomendações detalhadas pertencem à Fase 2 — Auditoria. Não use relatórios anteriores ou listas de achados como substitutos da inspeção do código.
 
 ## Transição da Fase 1
 
-Ao terminar a Fase 1, pare, mostre o resumo e pergunte se pode iniciar a Fase 2 — Auditoria. Aguarde um ok explícito. Se a análise for parcial, informe as lacunas; só prossiga com o escopo limitado se o usuário o aceitar. Um pedido inicial de fluxo completo não elimina a pausa.
+Ao terminar a Fase 1, mostre o resumo e prossiga diretamente para a Fase 2 — Auditoria do mesmo alvo, sem pedir confirmação. Se o usuário solicitou somente a Análise, encerre após o resumo. Se houver lacunas que impeçam auditar, informe-as e resolva o alvo/escopo antes de continuar.
 
 ## Fase 2 — Auditoria
 
-Comece apenas após a Fase 1 e sua aprovação para o mesmo alvo. Em uma retomada, reutilize a análise disponível e confira se o código mudou. Atualize evidências afetadas antes de auditar. Se o alvo mudou ou não houver análise, execute a Fase 1 e pare para aprovação.
+Comece após concluir a Fase 1 para o mesmo alvo; não é necessária uma confirmação entre essas duas fases. Em uma retomada, reutilize a análise disponível e confira se o código mudou. Atualize evidências afetadas antes de auditar. Se o alvo mudou ou não houver análise, execute a Fase 1 antes de auditar.
 
 Leia [references/anti-patterns.md](references/anti-patterns.md) e [references/audit-report-template.md](references/audit-report-template.md). As referências da Fase 2 só precisam ser carregadas ao entrar nesta fase.
 
@@ -52,19 +52,25 @@ Leia [references/anti-patterns.md](references/anti-patterns.md) e [references/au
 5. Compare com a análise manual, se fornecida, somente após a inspeção. Para o desafio, confira pelo menos cinco findings, incluindo um CRITICAL/HIGH; no primeiro projeto, verifique a correspondência com pelo menos cinco problemas da análise manual. Se faltar evidência para esses mínimos, declare o critério não atendido sem inventar achados.
 6. Apresente o relatório e uma proposta de escopo para a Fase 3, vinculada aos findings. Diferencie proposta de execução e confirmação de decisão pendente. Se houver lacunas relevantes, declare a auditoria parcial.
 
-Mantenha a auditoria em modo de leitura: não instale dependências, execute a aplicação/testes/seeds, aplique fixes ou altere arquivos. Gere o relatório na conversa; não escreva nem sobrescreva o relatório em disco antes da confirmação específica de salvamento. Consultar documentação externa não autoriza enviar código ou segredos do projeto a serviços externos. Omita valores sensíveis das evidências.
+Mantenha a auditoria em modo de leitura: não instale dependências, execute a aplicação/testes/seeds, aplique fixes ou altere arquivos. Gere o relatório na sessão ativa; no CLI, imprima-o no console. Não escreva nem sobrescreva o relatório em disco antes da autorização aplicável. Consultar documentação externa não autoriza enviar código ou segredos do projeto a serviços externos. Omita valores sensíveis das evidências.
 
 ## Confirmação e encerramento da Fase 2
 
-Depois de mostrar o relatório, pare e pergunte: **“Autoriza executar a Fase 3 — Refatoração, conforme o escopo e as mudanças de contrato apresentados neste relatório?”** Se houver decisões em aberto que alterem o escopo, apresente-as antes de solicitar aprovação. Registre a resposta real vinculada ao projeto, revisão e proposta; não presuma autorização pelo silêncio ou pela aprovação da Fase 1.
+Depois de apresentar o relatório completo e a proposta, peça confirmação na própria sessão. No CLI, imprima exatamente:
 
-Se foi solicitado um arquivo, peça também a confirmação do salvamento no caminho exato, separadamente da decisão de refatorar. Após o ok de salvamento, siga a referência do template e escreva somente o relatório autorizado. A exigência de revisão antes de qualquer escrita faz parte do fluxo desta auditoria.
+```text
+Phase 2 complete. Proceed with refactoring (Phase 3)? [y/n]
+```
+
+Aguarde a resposta real do usuário nesse console. `y` autoriza executar a proposta apresentada; `n` encerra mantendo a aplicação intacta. Resposta ausente ou ambígua não autoriza executar a Fase 3. Não responda ao próprio prompt nem envie `y` em nome do usuário. No aplicativo, faça a confirmação na conversa. Se houver decisões em aberto que alterem o escopo, apresente-as antes do prompt.
+
+Se o desafio pedir relatório em arquivo, informe seu caminho na proposta. Nesse caso, explique antes do prompt que `y` autoriza salvar esse relatório e refatorar o alvo. Use o destino informado pelo desafio para cada projeto, relativo à raiz do repositório. Se o usuário pedir somente salvar, essa autorização não permite refatorar. Não solicite novamente uma autorização já concedida e ainda aplicável.
 
 A autorização de refatoração vale para o alvo e a proposta apresentados. Mudanças materiais no código ou no escopo exigem atualizar a parte afetada do relatório e submetê-la à revisão. Uma recusa mantém os arquivos intactos e permite revisar a proposta na conversa. Uma aprovação já registrada e ainda aplicável não precisa ser solicitada novamente.
 
 ## Fase 3 — Refatoração e validação
 
-Só inicie com análise, auditoria e aprovação explícita da proposta para o mesmo projeto. Pedido genérico para refatorar, aprovação de salvamento ou aprovação da análise não substituem essa decisão. Se faltar uma fase, retome nela e respeite sua pausa. Confira a revisão e as alterações locais antes de editar; preserve trabalho preexistente.
+Só inicie com análise, auditoria e aprovação explícita da proposta para o mesmo projeto (por exemplo, `y` recebido no CLI). Pedido genérico para refatorar, aprovação de salvamento ou aprovação da análise não substituem essa decisão. Se faltar uma fase, retome nela e respeite sua pausa. Confira a revisão e as alterações locais antes de editar; preserve trabalho preexistente.
 
 Leia [references/mvc-guidelines.md](references/mvc-guidelines.md), [references/refactoring-playbook.md](references/refactoring-playbook.md) e [references/validation.md](references/validation.md). Carregue essas referências ao entrar nesta fase; selecione as transformações pertinentes aos findings aprovados.
 
@@ -80,3 +86,11 @@ Não declarar conclusão completa se houver falha de boot, endpoint não verific
 ## Encerramento da Fase 3
 
 Pare após apresentar o resultado do projeto atual. Aguarde revisão explícita antes de iniciar outro projeto ou requisito. A aprovação desta fase não se estende automaticamente aos demais projetos.
+
+## Apresentação no CLI
+
+Use a saída real da sessão do Codex CLI; não simule a execução imprimindo um relatório pré-fabricado. Abra a Fase 1 com `PHASE 1: PROJECT ANALYSIS` entre linhas `================================` e mostre Language, Framework (versões declarada/resolvida), Dependencies, Domain, Architecture, Source files e DB tables. Em seguida detalhe as evidências conforme a referência.
+
+Abra a Fase 2 com `ARCHITECTURE AUDIT REPORT` entre as mesmas linhas e mostre Project, Stack, Files, Summary por severidade, Findings e Total. Os totais e exemplos vêm da inspeção real do alvo, nunca dos números ilustrativos do README. Use o template completo para evidências, cobertura, limites e proposta. Exiba o prompt `[y/n]` somente depois de o usuário ter recebido todo o relatório e os deltas de contrato.
+
+Para abrir esta skill em uma sessão real do Codex CLI, execute [scripts/run-cli.command](scripts/run-cli.command). O launcher determina o alvo pela localização da cópia da skill e não preenche a confirmação do usuário.

@@ -1,0 +1,18 @@
+test_admin_tools_are_restricted_and_reset_is_opt_in (test_app.ApplicationTests.test_admin_tools_are_restricted_and_reset_is_opt_in) ... ok
+test_auth_expiration_tampering_and_roles (test_app.ApplicationTests.test_auth_expiration_tampering_and_roles) ... ok
+test_concurrent_checkout_cannot_oversell (test_app.ApplicationTests.test_concurrent_checkout_cannot_oversell) ... ok
+test_discount_boundaries (test_app.ApplicationTests.test_discount_boundaries) ... ok
+test_errors_and_health_do_not_expose_internal_details (test_app.ApplicationTests.test_errors_and_health_do_not_expose_internal_details) ... ok
+test_orders_validate_quantity_owner_and_combined_stock (test_app.ApplicationTests.test_orders_validate_quantity_owner_and_combined_stock) ... ok
+test_product_validation_and_serialization (test_app.ApplicationTests.test_product_validation_and_serialization) ... ok
+test_query_count_is_constant_and_missing_product_preserved (test_app.ApplicationTests.test_query_count_is_constant_and_missing_product_preserved) ... ok
+test_request_context_closes_connection_and_import_has_no_database_effect (test_app.ApplicationTests.test_request_context_closes_connection_and_import_has_no_database_effect) ... ok
+test_rollback_even_after_stock_write (test_app.ApplicationTests.test_rollback_even_after_stock_write) ... [2026-10-19 17:27:32,152] ERROR in http: unexpected_error type=RuntimeError reference=2ef6240aa762414791b676bb0c132316
+ok
+test_sql_values_and_safe_user_serialization (test_app.ApplicationTests.test_sql_values_and_safe_user_serialization) ... ok
+test_legacy_migration_is_explicit_idempotent_and_atomic (test_app.MigrationTests.test_legacy_migration_is_explicit_idempotent_and_atomic) ... ok
+
+----------------------------------------------------------------------
+Ran 12 tests in 2.679s
+
+OK

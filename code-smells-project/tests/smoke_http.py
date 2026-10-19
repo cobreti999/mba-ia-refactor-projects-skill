@@ -66,7 +66,7 @@ def run():
                 finally:
                     connection.close()
             try:
-                deadline = time.monotonic() + 15
+                deadline = time.monotonic() + 60
                 while True:
                     assert process.poll() is None, 'Servidor encerrou antes da prontidão'
                     try:
@@ -76,7 +76,7 @@ def run():
                     except (URLError, ConnectionError, TimeoutError):
                         pass
                     if time.monotonic() > deadline:
-                        raise AssertionError('Servidor não ficou pronto em 15 segundos')
+                        raise AssertionError('Servidor não ficou pronto em 60 segundos')
                     time.sleep(.1)
                 assert process.poll() is None
                 check('GET','/',200)

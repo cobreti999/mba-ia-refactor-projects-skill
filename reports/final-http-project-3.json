@@ -1,0 +1,716 @@
+{
+  "runtime": "3.14.7",
+  "dependencies": {
+    "flask": "3.0.0",
+    "flask-sqlalchemy": "3.1.1",
+    "flask-cors": "4.0.0",
+    "sqlalchemy": "2.1.5",
+    "werkzeug": "3.1.9",
+    "itsdangerous": "2.2.0"
+  },
+  "isolation": "temporary SQLite file, synthetic credentials and loopback port allocated by OS",
+  "requests": [
+    {
+      "name": "root",
+      "method": "GET",
+      "path": "/",
+      "request_path": "/",
+      "expected": 200,
+      "observed": 200,
+      "keys": [
+        "message",
+        "version"
+      ],
+      "items": null
+    },
+    {
+      "name": "health",
+      "method": "GET",
+      "path": "/health",
+      "request_path": "/health",
+      "expected": 200,
+      "observed": 200,
+      "keys": [
+        "status",
+        "timestamp"
+      ],
+      "items": null
+    },
+    {
+      "name": "admin login",
+      "method": "POST",
+      "path": "/login",
+      "request_path": "/login",
+      "expected": 200,
+      "observed": 200,
+      "keys": [
+        "expires_in",
+        "message",
+        "token",
+        "user"
+      ],
+      "items": null
+    },
+    {
+      "name": "manager login",
+      "method": "POST",
+      "path": "/login",
+      "request_path": "/login",
+      "expected": 200,
+      "observed": 200,
+      "keys": [
+        "expires_in",
+        "message",
+        "token",
+        "user"
+      ],
+      "items": null
+    },
+    {
+      "name": "public registration",
+      "method": "POST",
+      "path": "/users",
+      "request_path": "/users",
+      "expected": 201,
+      "observed": 201,
+      "keys": [
+        "active",
+        "created_at",
+        "email",
+        "id",
+        "name",
+        "role"
+      ],
+      "items": null
+    },
+    {
+      "name": "second public registration",
+      "method": "POST",
+      "path": "/users",
+      "request_path": "/users",
+      "expected": 201,
+      "observed": 201,
+      "keys": [
+        "active",
+        "created_at",
+        "email",
+        "id",
+        "name",
+        "role"
+      ],
+      "items": null
+    },
+    {
+      "name": "alice login",
+      "method": "POST",
+      "path": "/login",
+      "request_path": "/login",
+      "expected": 200,
+      "observed": 200,
+      "keys": [
+        "expires_in",
+        "message",
+        "token",
+        "user"
+      ],
+      "items": null
+    },
+    {
+      "name": "bob login",
+      "method": "POST",
+      "path": "/login",
+      "request_path": "/login",
+      "expected": 200,
+      "observed": 200,
+      "keys": [
+        "expires_in",
+        "message",
+        "token",
+        "user"
+      ],
+      "items": null
+    },
+    {
+      "name": "create category",
+      "method": "POST",
+      "path": "/categories",
+      "request_path": "/categories",
+      "expected": 201,
+      "observed": 201,
+      "keys": [
+        "color",
+        "created_at",
+        "description",
+        "id",
+        "name"
+      ],
+      "items": null
+    },
+    {
+      "name": "list categories",
+      "method": "GET",
+      "path": "/categories",
+      "request_path": "/categories",
+      "expected": 200,
+      "observed": 200,
+      "keys": [
+        "color",
+        "created_at",
+        "description",
+        "id",
+        "name",
+        "task_count"
+      ],
+      "items": 1
+    },
+    {
+      "name": "update category",
+      "method": "PUT",
+      "path": "/categories/<int:cat_id>",
+      "request_path": "/categories/1",
+      "expected": 200,
+      "observed": 200,
+      "keys": [
+        "color",
+        "created_at",
+        "description",
+        "id",
+        "name"
+      ],
+      "items": null
+    },
+    {
+      "name": "create owned task",
+      "method": "POST",
+      "path": "/tasks",
+      "request_path": "/tasks",
+      "expected": 201,
+      "observed": 201,
+      "keys": [
+        "category_id",
+        "created_at",
+        "description",
+        "due_date",
+        "id",
+        "priority",
+        "status",
+        "tags",
+        "title",
+        "updated_at",
+        "user_id"
+      ],
+      "items": null
+    },
+    {
+      "name": "list owned tasks",
+      "method": "GET",
+      "path": "/tasks",
+      "request_path": "/tasks",
+      "expected": 200,
+      "observed": 200,
+      "keys": [
+        "category_id",
+        "category_name",
+        "created_at",
+        "description",
+        "due_date",
+        "id",
+        "overdue",
+        "priority",
+        "status",
+        "tags",
+        "title",
+        "updated_at",
+        "user_id",
+        "user_name"
+      ],
+      "items": 1
+    },
+    {
+      "name": "task detail",
+      "method": "GET",
+      "path": "/tasks/<int:task_id>",
+      "request_path": "/tasks/1",
+      "expected": 200,
+      "observed": 200,
+      "keys": [
+        "category_id",
+        "created_at",
+        "description",
+        "due_date",
+        "id",
+        "overdue",
+        "priority",
+        "status",
+        "tags",
+        "title",
+        "updated_at",
+        "user_id"
+      ],
+      "items": null
+    },
+    {
+      "name": "task search",
+      "method": "GET",
+      "path": "/tasks/search",
+      "request_path": "/tasks/search?q=HTTP&priority=2&user_id=3",
+      "expected": 200,
+      "observed": 200,
+      "keys": [
+        "category_id",
+        "created_at",
+        "description",
+        "due_date",
+        "id",
+        "priority",
+        "status",
+        "tags",
+        "title",
+        "updated_at",
+        "user_id"
+      ],
+      "items": 1
+    },
+    {
+      "name": "task stats",
+      "method": "GET",
+      "path": "/tasks/stats",
+      "request_path": "/tasks/stats",
+      "expected": 200,
+      "observed": 200,
+      "keys": [
+        "cancelled",
+        "completion_rate",
+        "done",
+        "in_progress",
+        "overdue",
+        "pending",
+        "total"
+      ],
+      "items": null
+    },
+    {
+      "name": "list users",
+      "method": "GET",
+      "path": "/users",
+      "request_path": "/users",
+      "expected": 200,
+      "observed": 200,
+      "keys": [
+        "active",
+        "created_at",
+        "email",
+        "id",
+        "name",
+        "role",
+        "task_count"
+      ],
+      "items": 4
+    },
+    {
+      "name": "own user detail",
+      "method": "GET",
+      "path": "/users/<int:user_id>",
+      "request_path": "/users/3",
+      "expected": 200,
+      "observed": 200,
+      "keys": [
+        "active",
+        "created_at",
+        "email",
+        "id",
+        "name",
+        "role",
+        "tasks"
+      ],
+      "items": null
+    },
+    {
+      "name": "user task projection",
+      "method": "GET",
+      "path": "/users/<int:user_id>/tasks",
+      "request_path": "/users/3/tasks",
+      "expected": 200,
+      "observed": 200,
+      "keys": [
+        "created_at",
+        "description",
+        "due_date",
+        "id",
+        "overdue",
+        "priority",
+        "status",
+        "title"
+      ],
+      "items": 1
+    },
+    {
+      "name": "team summary",
+      "method": "GET",
+      "path": "/reports/summary",
+      "request_path": "/reports/summary",
+      "expected": 200,
+      "observed": 200,
+      "keys": [
+        "generated_at",
+        "overdue",
+        "overview",
+        "recent_activity",
+        "tasks_by_priority",
+        "tasks_by_status",
+        "user_productivity"
+      ],
+      "items": null
+    },
+    {
+      "name": "own report",
+      "method": "GET",
+      "path": "/reports/user/<int:user_id>",
+      "request_path": "/reports/user/3",
+      "expected": 200,
+      "observed": 200,
+      "keys": [
+        "statistics",
+        "user"
+      ],
+      "items": null
+    },
+    {
+      "name": "update owned task",
+      "method": "PUT",
+      "path": "/tasks/<int:task_id>",
+      "request_path": "/tasks/1",
+      "expected": 200,
+      "observed": 200,
+      "keys": [
+        "category_id",
+        "created_at",
+        "description",
+        "due_date",
+        "id",
+        "priority",
+        "status",
+        "tags",
+        "title",
+        "updated_at",
+        "user_id"
+      ],
+      "items": null
+    },
+    {
+      "name": "completed task is not overdue",
+      "method": "GET",
+      "path": "/tasks/<int:task_id>",
+      "request_path": "/tasks/1",
+      "expected": 200,
+      "observed": 200,
+      "keys": [
+        "category_id",
+        "created_at",
+        "description",
+        "due_date",
+        "id",
+        "overdue",
+        "priority",
+        "status",
+        "tags",
+        "title",
+        "updated_at",
+        "user_id"
+      ],
+      "items": null
+    },
+    {
+      "name": "update own profile",
+      "method": "PUT",
+      "path": "/users/<int:user_id>",
+      "request_path": "/users/3",
+      "expected": 200,
+      "observed": 200,
+      "keys": [
+        "active",
+        "created_at",
+        "email",
+        "id",
+        "name",
+        "role"
+      ],
+      "items": null
+    },
+    {
+      "name": "no authentication",
+      "method": "GET",
+      "path": "/users",
+      "request_path": "/users",
+      "expected": 401,
+      "observed": 401,
+      "keys": [
+        "error"
+      ],
+      "items": null
+    },
+    {
+      "name": "user cannot list team",
+      "method": "GET",
+      "path": "/users",
+      "request_path": "/users",
+      "expected": 403,
+      "observed": 403,
+      "keys": [
+        "error"
+      ],
+      "items": null
+    },
+    {
+      "name": "user cannot read global report",
+      "method": "GET",
+      "path": "/reports/summary",
+      "request_path": "/reports/summary",
+      "expected": 403,
+      "observed": 403,
+      "keys": [
+        "error"
+      ],
+      "items": null
+    },
+    {
+      "name": "tampered token",
+      "method": "GET",
+      "path": "/tasks",
+      "request_path": "/tasks",
+      "expected": 401,
+      "observed": 401,
+      "keys": [
+        "error"
+      ],
+      "items": null
+    },
+    {
+      "name": "signup cannot grant admin",
+      "method": "POST",
+      "path": "/users",
+      "request_path": "/users",
+      "expected": 403,
+      "observed": 403,
+      "keys": [
+        "error"
+      ],
+      "items": null
+    },
+    {
+      "name": "cross user task access",
+      "method": "GET",
+      "path": "/tasks/<int:task_id>",
+      "request_path": "/tasks/1",
+      "expected": 403,
+      "observed": 403,
+      "keys": [
+        "error"
+      ],
+      "items": null
+    },
+    {
+      "name": "own role cannot escalate",
+      "method": "PUT",
+      "path": "/users/<int:user_id>",
+      "request_path": "/users/3",
+      "expected": 403,
+      "observed": 403,
+      "keys": [
+        "error"
+      ],
+      "items": null
+    },
+    {
+      "name": "cannot assign another owner",
+      "method": "POST",
+      "path": "/tasks",
+      "request_path": "/tasks",
+      "expected": 403,
+      "observed": 403,
+      "keys": [
+        "error"
+      ],
+      "items": null
+    },
+    {
+      "name": "manager cannot delete accounts",
+      "method": "DELETE",
+      "path": "/users/<int:user_id>",
+      "request_path": "/users/4",
+      "expected": 403,
+      "observed": 403,
+      "keys": [
+        "error"
+      ],
+      "items": null
+    },
+    {
+      "name": "invalid filter",
+      "method": "GET",
+      "path": "/tasks/search",
+      "request_path": "/tasks/search?priority=not-an-integer",
+      "expected": 400,
+      "observed": 400,
+      "keys": [
+        "error"
+      ],
+      "items": null
+    },
+    {
+      "name": "invalid input type",
+      "method": "POST",
+      "path": "/tasks",
+      "request_path": "/tasks",
+      "expected": 400,
+      "observed": 400,
+      "keys": [
+        "error"
+      ],
+      "items": null
+    },
+    {
+      "name": "malformed JSON",
+      "method": "POST",
+      "path": "/tasks",
+      "request_path": "/tasks",
+      "expected": 400,
+      "observed": 400,
+      "keys": [
+        "error"
+      ],
+      "items": null
+    },
+    {
+      "name": "deactivate user",
+      "method": "PUT",
+      "path": "/users/<int:user_id>",
+      "request_path": "/users/4",
+      "expected": 200,
+      "observed": 200,
+      "keys": [
+        "active",
+        "created_at",
+        "email",
+        "id",
+        "name",
+        "role"
+      ],
+      "items": null
+    },
+    {
+      "name": "inactive identity invalidates token",
+      "method": "GET",
+      "path": "/tasks",
+      "request_path": "/tasks",
+      "expected": 401,
+      "observed": 401,
+      "keys": [
+        "error"
+      ],
+      "items": null
+    },
+    {
+      "name": "delete category",
+      "method": "DELETE",
+      "path": "/categories/<int:cat_id>",
+      "request_path": "/categories/1",
+      "expected": 200,
+      "observed": 200,
+      "keys": [
+        "message"
+      ],
+      "items": null
+    },
+    {
+      "name": "delete own task",
+      "method": "DELETE",
+      "path": "/tasks/<int:task_id>",
+      "request_path": "/tasks/1",
+      "expected": 200,
+      "observed": 200,
+      "keys": [
+        "message"
+      ],
+      "items": null
+    },
+    {
+      "name": "create task for cascade",
+      "method": "POST",
+      "path": "/tasks",
+      "request_path": "/tasks",
+      "expected": 201,
+      "observed": 201,
+      "keys": [
+        "category_id",
+        "created_at",
+        "description",
+        "due_date",
+        "id",
+        "priority",
+        "status",
+        "tags",
+        "title",
+        "updated_at",
+        "user_id"
+      ],
+      "items": null
+    },
+    {
+      "name": "admin removes user and owned tasks",
+      "method": "DELETE",
+      "path": "/users/<int:user_id>",
+      "request_path": "/users/3",
+      "expected": 200,
+      "observed": 200,
+      "keys": [
+        "message"
+      ],
+      "items": null
+    },
+    {
+      "name": "removed user token invalid",
+      "method": "GET",
+      "path": "/tasks",
+      "request_path": "/tasks",
+      "expected": 401,
+      "observed": 401,
+      "keys": [
+        "error"
+      ],
+      "items": null
+    },
+    {
+      "name": "missing task",
+      "method": "GET",
+      "path": "/tasks/<int:task_id>",
+      "request_path": "/tasks/1",
+      "expected": 404,
+      "observed": 404,
+      "keys": [
+        "error"
+      ],
+      "items": null
+    }
+  ],
+  "passed": true,
+  "boot": {
+    "command": "python app.py",
+    "host": "127.0.0.1",
+    "ready": true,
+    "process_stopped": true,
+    "pid": 98238,
+    "port": 50736,
+    "exit_code": -15,
+    "server_log": " * Serving Flask app 'app'\n * Debug mode: off\nWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.\n * Running on http://127.0.0.1:50736\nPress CTRL+C to quit\n127.0.0.1 - - [19/Oct/2026 17:27:45] \"GET / HTTP/1.1\" 200 -\n127.0.0.1 - - [19/Oct/2026 17:27:45] \"GET / HTTP/1.1\" 200 -\n127.0.0.1 - - [19/Oct/2026 17:27:45] \"GET /health HTTP/1.1\" 200 -\n127.0.0.1 - - [19/Oct/2026 17:27:45] \"POST /login HTTP/1.1\" 200 -\n127.0.0.1 - - [19/Oct/2026 17:27:45] \"POST /login HTTP/1.1\" 200 -\n127.0.0.1 - - [19/Oct/2026 17:27:45] \"POST /users HTTP/1.1\" 201 -\n127.0.0.1 - - [19/Oct/2026 17:27:45] \"POST /users HTTP/1.1\" 201 -\n127.0.0.1 - - [19/Oct/2026 17:27:45] \"POST /login HTTP/1.1\" 200 -\n127.0.0.1 - - [19/Oct/2026 17:27:45] \"POST /login HTTP/1.1\" 200 -\n127.0.0.1 - - [19/Oct/2026 17:27:45] \"POST /categories HTTP/1.1\" 201 -\n127.0.0.1 - - [19/Oct/2026 17:27:45] \"GET /categories HTTP/1.1\" 200 -\n127.0.0.1 - - [19/Oct/2026 17:27:45] \"PUT /categories/1 HTTP/1.1\" 200 -\n127.0.0.1 - - [19/Oct/2026 17:27:45] \"POST /tasks HTTP/1.1\" 201 -\n127.0.0.1 - - [19/Oct/2026 17:27:45] \"GET /tasks HTTP/1.1\" 200 -\n127.0.0.1 - - [19/Oct/2026 17:27:45] \"GET /tasks/1 HTTP/1.1\" 200 -\n127.0.0.1 - - [19/Oct/2026 17:27:45] \"GET /tasks/search?q=HTTP&priority=2&user_id=3 HTTP/1.1\" 200 -\n127.0.0.1 - - [19/Oct/2026 17:27:45] \"GET /tasks/stats HTTP/1.1\" 200 -\n127.0.0.1 - - [19/Oct/2026 17:27:45] \"GET /users HTTP/1.1\" 200 -\n127.0.0.1 - - [19/Oct/2026 17:27:45] \"GET /users/3 HTTP/1.1\" 200 -\n127.0.0.1 - - [19/Oct/2026 17:27:45] \"GET /users/3/tasks HTTP/1.1\" 200 -\n127.0.0.1 - - [19/Oct/2026 17:27:45] \"GET /reports/summary HTTP/1.1\" 200 -\n127.0.0.1 - - [19/Oct/2026 17:27:45] \"GET /reports/user/3 HTTP/1.1\" 200 -\n127.0.0.1 - - [19/Oct/2026 17:27:45] \"PUT /tasks/1 HTTP/1.1\" 200 -\n127.0.0.1 - - [19/Oct/2026 17:27:45] \"GET /tasks/1 HTTP/1.1\" 200 -\n127.0.0.1 - - [19/Oct/2026 17:27:45] \"PUT /users/3 HTTP/1.1\" 200 -\n127.0.0.1 - - [19/Oct/2026 17:27:45] \"GET /users HTTP/1.1\" 401 -\n127.0.0.1 - - [19/Oct/2026 17:27:45] \"GET /users HTTP/1.1\" 403 -\n127.0.0.1 - - [19/Oct/2026 17:27:45] \"GET /reports/summary HTTP/1.1\" 403 -\n127.0.0.1 - - [19/Oct/2026 17:27:45] \"GET /tasks HTTP/1.1\" 401 -\n127.0.0.1 - - [19/Oct/2026 17:27:45] \"POST /users HTTP/1.1\" 403 -\n127.0.0.1 - - [19/Oct/2026 17:27:45] \"GET /tasks/1 HTTP/1.1\" 403 -\n127.0.0.1 - - [19/Oct/2026 17:27:45] \"PUT /users/3 HTTP/1.1\" 403 -\n127.0.0.1 - - [19/Oct/2026 17:27:45] \"POST /tasks HTTP/1.1\" 403 -\n127.0.0.1 - - [19/Oct/2026 17:27:45] \"DELETE /users/4 HTTP/1.1\" 403 -\n127.0.0.1 - - [19/Oct/2026 17:27:45] \"GET /tasks/search?priority=not-an-integer HTTP/1.1\" 400 -\n127.0.0.1 - - [19/Oct/2026 17:27:45] \"POST /tasks HTTP/1.1\" 400 -\n127.0.0.1 - - [19/Oct/2026 17:27:45] \"POST /tasks HTTP/1.1\" 400 -\n127.0.0.1 - - [19/Oct/2026 17:27:45] \"PUT /users/4 HTTP/1.1\" 200 -\n127.0.0.1 - - [19/Oct/2026 17:27:45] \"GET /tasks HTTP/1.1\" 401 -\n127.0.0.1 - - [19/Oct/2026 17:27:45] \"DELETE /categories/1 HTTP/1.1\" 200 -\n127.0.0.1 - - [19/Oct/2026 17:27:45] \"DELETE /tasks/1 HTTP/1.1\" 200 -\n127.0.0.1 - - [19/Oct/2026 17:27:45] \"POST /tasks HTTP/1.1\" 201 -\n127.0.0.1 - - [19/Oct/2026 17:27:45] \"DELETE /users/3 HTTP/1.1\" 200 -\n127.0.0.1 - - [19/Oct/2026 17:27:45] \"GET /tasks HTTP/1.1\" 401 -\n127.0.0.1 - - [19/Oct/2026 17:27:45] \"GET /tasks/1 HTTP/1.1\" 404 -\n"
+  },
+  "verified_endpoints": 22,
+  "database_effects_verified": true,
+  "effects": {
+    "category_delete_unlinks_task": true,
+    "task_delete_persisted": true,
+    "user_delete_removes_owned_tasks": true,
+    "foreign_key_errors": 0
+  },
+  "logs_contain_secrets": false
+}

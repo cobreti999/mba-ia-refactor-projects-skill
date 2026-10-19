@@ -14,13 +14,13 @@ Ferramenta escolhida: **OpenAI Codex**. O repositório informado já é o fork d
 | Requisito 2 — Criação da Skill | Concluído: três fases implementadas e aprovadas |
 | Requisito 3 — Execução nos três projetos | Concluído: três projetos refatorados e validados |
 
-O desenvolvimento para ao final de cada requisito e de cada fase da skill, aguardando um **ok explícito**. Na criação, serão entregues separadamente as fases Análise, Auditoria e Refatoração. Na execução, também haverá pausa entre as fases de cada projeto. A confirmação de uma etapa autoriza somente a próxima.
+Na criação, as fases foram entregues separadamente. Na execução, por solicitação do usuário, Análise e Auditoria seguem em sequência na sessão ativa (CLI ou conversa). A Refatoração exige resposta explícita ao prompt `Phase 2 complete. Proceed with refactoring (Phase 3)? [y/n]`. Há pausa ao concluir cada projeto/requisito.
 
 ## Análise Manual
 
 Análise realizada em **19/10/2026**, por leitura direta do código, sem executar a skill. Base: commit `6d1ce6248c3e956801010a89d8bdaab48029bf30`. Os caminhos e intervalos de linhas abaixo correspondem a essa versão original; poderão mudar após a refatoração. Foram lidos os arquivos-fonte dos três projetos, seus manifestos de dependências, READMEs e exemplos de requisições disponíveis.
 
-Esta etapa é uma inspeção estática: as evidências foram conferidas no código, mas boot, requisições HTTP e testes de regressão ainda não foram executados. As versões da tabela são as **declaradas**, não versões confirmadas em execução. O levantamento prioriza problemas concretos e não pretende esgotar todos os achados da futura auditoria.
+Esta etapa registra a inspeção estática original: as evidências foram conferidas no código, mas, naquele momento, boot, requisições HTTP e testes de regressão ainda não haviam sido executados. As versões da tabela são as **declaradas**, não versões confirmadas em execução. O levantamento prioriza problemas concretos e não pretende esgotar todos os achados da futura auditoria.
 
 ### Visão dos projetos
 
@@ -87,7 +87,7 @@ Cada projeto tem pelo menos cinco problemas, pelo menos um CRITICAL/HIGH, dois M
 
 Os principais sinais reutilizáveis são: SQL concatenado com entrada externa, exposição de credenciais, ausência de controle de acesso, mistura de camadas, estado global, falta de transação, consultas dentro de loops, validação inconsistente, duplicação e código morto. A futura auditoria também deverá investigar APIs obsoletas e confirmar sua situação conforme a versão da stack; essa verificação ainda não foi realizada nesta etapa.
 
-**Próximo passo, após aprovação:** Requisito 3, Projeto 2 — executar somente a Fase 1 da skill em `ecommerce-api-legacy/` e parar para revisão antes da Auditoria.
+**Estado atual:** Requisito 3 concluído nos três projetos; resultados e evidências registrados abaixo.
 
 
 ## Execução da Skill — Projeto 1 concluído
@@ -107,6 +107,8 @@ A aplicação mantém Flask e SQLite, agora com rotas, controllers, serviços, r
 O projeto 2 foi concluído na execução registrada em Resultados abaixo. O projeto 3 permanece pendente de revisão explícita.
 
 ## Construção da Skill
+
+O registro abaixo descreve as entregas incrementais originais. O fluxo atual de execução foi atualizado por solicitação do usuário: fases 1 e 2 em sequência e confirmação da Fase 3 no CLI, conforme a seção Como Executar.
 
 ### Fase 1 — Análise (implementada)
 
@@ -144,7 +146,7 @@ A skill está em [`code-smells-project/.agents/skills/refactor-arch/`](code-smel
 
 **APIs obsoletas:** a regra exige versão aplicável e documentação oficial, distinguindo deprecated, legacy suportada e removida. O catálogo traz fontes de SQLAlchemy e Python e exige pesquisa equivalente para outras stacks. Uma chamada a `datetime.utcnow()` sem versão de Python estabelecida fica como candidato condicionado, não como depreciação confirmada no ambiente. A troca de APIs também deve considerar diferenças semânticas, como datas com e sem fuso horário.
 
-**Pausas e arquivos:** a Fase 1 pede aprovação para a Auditoria; a Fase 2 apresenta o relatório e pede autorização para a proposta de refatoração. O relatório é exibido primeiro na conversa. Se for solicitado salvamento, a confirmação especifica o destino e autoriza somente esse arquivo; não autoriza alterar a aplicação. A Fase 3 começa somente com aprovação explícita da proposta e verificação de que o alvo e o escopo continuam correspondentes. Os relatórios `reports/audit-project-{1,2,3}.md` serão produzidos na execução do Requisito 3.
+**Pausas e arquivos:** no fluxo atual, as fases 1 e 2 seguem em sequência. A Fase 2 apresenta o relatório completo e pede autorização antes da refatoração. A aprovação pode incluir o salvamento no destino informado; pedir somente salvamento não autoriza alterar a aplicação. A Fase 3 começa somente com aprovação explícita da proposta e verificação de que o alvo e o escopo continuam correspondentes. Os três relatórios foram produzidos na execução do Requisito 3 e estão em `reports/`.
 
 **Conferência desta entrega:** `quick_validate.py` aprovado, `git diff --check` sem erros, 16 IDs únicos e referências locais verificadas. Revisão estática das transições de fase e dos casos de falso positivo: SQL parametrizado, import por efeito colateral, controle de acesso em middleware e API com versão desconhecida. A orientação exige verificar esses casos antes de confirmar findings. Esta revisão documental não é uma execução independente do agente nem comprova a detecção nos três projetos; essa validação permanece no Requisito 3.
 
@@ -179,48 +181,101 @@ A skill está em [`code-smells-project/.agents/skills/refactor-arch/`](code-smel
 
 As verificações comportamentais foram executadas diretamente sobre os exemplos extraídos do Markdown, com SQLite em memória e script temporário. Os demais exemplos tiveram verificação de sintaxe e revisão documental; não foram tratados como aplicações completas. Isso não substitui a execução da skill nos três projetos, nem constitui teste independente do comportamento do agente.
 
-**Requisito 2 concluído:** as cinco áreas obrigatórias estão cobertas (análise, catálogo, template de auditoria, guidelines MVC e playbook), com pausas entre fases. As cópias para os outros projetos, os relatórios de auditoria, a refatoração das aplicações e seus commits permanecem no Requisito 3.
+**Requisito 2 concluído:** as cinco áreas obrigatórias estão cobertas (análise, catálogo, template de auditoria, guidelines MVC e playbook), com pausas entre fases. As cópias, relatórios, refatorações e commits foram concluídos na execução do Requisito 3.
 
 ## Como Executar
 
-### Versão atual — três fases com aprovação entre etapas
+### Skill nos três projetos
 
-Pré-requisito: Codex instalado e configurado, com acesso aos arquivos locais. A análise não exige instalar as dependências das aplicações.
+Pré-requisito: **Codex CLI instalado e autenticado**. A análise não exige instalar dependências da aplicação. As três cópias idênticas usam a convenção do Codex: `.agents/skills/refactor-arch/`.
 
-Na raiz deste repositório, entre no projeto e abra o Codex CLI:
+Execute um destes blocos a partir da raiz do repositório:
 
 ```bash
+# Projeto 1 — loja Flask
 cd code-smells-project
-codex
+codex --no-alt-screen --search '$refactor-arch Execute as fases 1 e 2 e apresente a proposta antes da Fase 3.'
 ```
 
-No prompt do Codex, invoque:
+```bash
+# Projeto 2 — LMS Express
+cd ecommerce-api-legacy
+codex --no-alt-screen --search '$refactor-arch Execute as fases 1 e 2 e apresente a proposta antes da Fase 3.'
+```
+
+```bash
+# Projeto 3 — tarefas Flask/SQLAlchemy
+cd task-manager-api
+codex --no-alt-screen --search '$refactor-arch Execute as fases 1 e 2 e apresente a proposta antes da Fase 3.'
+```
+
+Também é possível abrir `codex` na pasta de cada projeto e digitar `$refactor-arch`, ou executar `.agents/skills/refactor-arch/scripts/run-cli.command`. O launcher usa o Codex CLI real, localiza o projeto pela posição da cópia da skill e preserva o histórico do console. Não contém relatório pré-fabricado nem resposta automática à confirmação.
+
+A saída contém `PHASE 1: PROJECT ANALYSIS` e depois `ARCHITECTURE AUDIT REPORT`, com evidências, contagens reais e proposta. As fases 1 e 2 não têm pausa intermediária. Antes de alterar a aplicação, a skill apresenta os deltas e o destino `reports/audit-project-N.md` na raiz e pergunta:
 
 ```text
-$refactor-arch Analise este projeto e execute somente a Fase 1.
+Phase 2 complete. Proceed with refactoring (Phase 3)? [y/n]
 ```
 
-Para usar esta mesma conversa, aberta na raiz do repositório, indique o arquivo e o alvo explicitamente, pois a descoberta local não busca skills em subpastas arbitrárias:
+Digite `y` no CLI para salvar o relatório e executar a proposta apresentada; `n` encerra sem refatorar. Ausência de resposta mantém a Fase 3 pendente. É possível solicitar somente uma fase. No aplicativo, indique a skill e o alvo explicitamente, por exemplo:
 
 ```text
-Use a skill em code-smells-project/.agents/skills/refactor-arch/SKILL.md
-para executar somente a Fase 1 no projeto code-smells-project.
+Use task-manager-api/.agents/skills/refactor-arch/SKILL.md no projeto
+ task-manager-api. Execute Análise e Auditoria em sequência nesta conversa
+ e peça confirmação antes da Refatoração.
 ```
 
-A saída esperada contém stack, domínio, persistência, contagem de fontes, mapa de responsabilidades, fluxo representativo, endpoints, comandos identificados e limitações. Ao final, a skill para e pede aprovação para iniciar a Auditoria. Para continuar na mesma sessão após revisar a análise:
+### Executar e validar as aplicações refatoradas
 
-```text
-Ok, prossiga para a Fase 2 — Auditoria deste mesmo projeto.
-```
+| Projeto | Runtime validado / pré-requisito | Instalação e configuração | Testes |
+|---|---|---|---|
+| Loja Flask | Python 3.14.7 validado | [README e migração de senhas](code-smells-project/README.md): venv, requirements, chave/SQLite, init-db e create-admin | `python -m unittest discover -s tests -v`; `python tests/smoke_http.py` |
+| LMS Express | Node 24.22.0 validado; Node >=22 | [README e seed explícito](ecommerce-api-legacy/README.md): npm ci, ADMIN_TOKEN e seed opcional | `npm test`; `npm run test:http` |
+| Tarefas Flask | Python 3.14.7 validado; Python >=3.11 | [README e reset das contas MD5](task-manager-api/README.md): venv, requirements-lock, chave/SQLite, init-db e create-admin | `python -W error::DeprecationWarning -m unittest discover -s tests -v`; `python tests/smoke_http.py` |
 
-A Fase 2 apresenta o relatório na conversa e pede confirmação antes de qualquer escrita. Uma análise ausente ou de outro alvo exige passar pela Fase 1; alterações no código exigem atualizar as evidências afetadas. Após revisar o relatório e suas mudanças de contrato, autorize a proposta para iniciar a Fase 3:
+Execute cada comando na pasta indicada e no seu runtime/venv. Os READMEs contêm os blocos completos de instalação e boot. Nos projetos Python, finalize a preparação e inicie com `python app.py`; no Node, `npm start`. Os testes HTTP iniciam seus próprios processos e bancos descartáveis, exercitam caminhos autorizados e erros e encerram os processos. Eles precisam de permissão para abrir portas em loopback; o processo de tarefas admite até 60 segundos de prontidão devido ao DNS reverso observado no ambiente. Nenhum servidor previamente iniciado é necessário para os testes.
 
-```text
-Aprovo a proposta de refatoração apresentada para este projeto.
-Execute a Fase 3 e pare ao concluir a validação.
-```
 
-A Fase 3 prepara as dependências necessárias em ambiente local/isolado e usa os comandos de boot/teste identificados no projeto. Ao final, apresenta evidências e aguarda revisão antes de seguir para outro projeto. Estes comandos são instruções de uso; a invocação completa via CLI e o funcionamento das aplicações ainda não foram validados nesta entrega.
+## Resultados — conferência final do desafio
+
+| Projeto | CRITICAL | HIGH | MEDIUM | LOW | Total corrigido | Correspondência manual | Regressões | Endpoints reais |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| code-smells-project | 4 | 4 | 4 | 2 | 14/14 | 9/9 | 12/12 | 19/19 |
+| ecommerce-api-legacy | 4 | 2 | 5 | 2 | 13/13 | 8/8 | 16/16 | 3/3 |
+| task-manager-api | 2 | 3 | 5 | 2 | 12/12 | 8/8 | 16/16 | 22/22 |
+| **Total** | **10** | **9** | **14** | **6** | **39/39** | **25/25** | **44/44** | **44/44** |
+
+A conferência final repetiu as suítes e o HTTP real: **94 cenários HTTP** (24 + 26 + 44), todos com resultados esperados. Os processos foram encerrados. [Relatório final de aceite](reports/final-verification.md) e [evidência estruturada](reports/final-verification.json) registram comandos, versões, hashes e links para logs sanitizados. Os relatórios históricos das fases foram preservados.
+
+### Checklist preenchido por projeto
+
+As marcações abaixo correspondem a evidências nos relatórios [P1](reports/audit-project-1.md), [P2](reports/audit-project-2.md) e [P3](reports/audit-project-3.md). As linhas originais referem-se à base auditada, que continua acessível no histórico Git.
+
+| Critério | Projeto 1 | Projeto 2 | Projeto 3 |
+|---|---|---|---|
+| Fase 1: linguagem e framework corretos | [x] Python/Flask | [x] JavaScript/Express | [x] Python/Flask |
+| Fase 1: domínio correto | [x] E-commerce | [x] LMS/checkout | [x] Tarefas/produtividade |
+| Fase 1: inventário conferido na base | [x] 4 fontes/780 linhas | [x] 3 fontes/180 linhas | [x] 15 fontes/1.158 linhas |
+| Fase 2: relatório com evidência, impacto, recomendação e validação | [x] | [x] | [x] |
+| Fase 2: arquivo/linhas originais e severidades ordenadas | [x] | [x] | [x] |
+| Fase 2: pelo menos cinco achados e um CRITICAL/HIGH | [x] 14 | [x] 13 | [x] 12 |
+| Fase 2: APIs deprecated verificadas por versão | [x] Nenhuma confirmada | [x] Driver sqlite3 | [x] Query.get; datas após confirmar runtime |
+| Fase 2: confirmação antes da refatoração | [x] Conversa | [x] y no CLI | [x] Conversa |
+| Fase 3: MVC, models, rotas/views e controllers separados | [x] | [x] | [x] |
+| Fase 3: configuração externa e erros centrais | [x] | [x] | [x] |
+| Fase 3: entry point claro e boot real | [x] | [x] | [x] |
+| Fase 3: todos os endpoints com sucesso autorizado e efeitos verificados | [x] 19 | [x] 3 | [x] 22 |
+| Fase 3: regressões, contratos e estratégia de dados documentados | [x] | [x] | [x] |
+| Relatórios, logs de aplicação e código refatorado versionados | [x] | [x] | [x] |
+
+### Reutilização e desafios encontrados
+
+A mesma skill e os mesmos seis arquivos de referência foram usados nos três alvos, sem nomes de tabelas/rotas embutidos nas regras. O catálogo tem **16 padrões** e o playbook **12 transformações**, com **24 exemplos antes/depois** em Python e JavaScript. Os alvos foram determinados pelo diretório/pedido; as instruções guiam a inspeção, não um detector dependente de uma stack.
+
+Na loja, a extração criou um pacote MVC em torno de sqlite3 e transações explícitas. No LMS, callbacks e classe concentradora deram lugar a serviços/repositório; a troca de driver deprecated exigiu validar a semântica transacional síncrona e o runtime. No gerenciador de tarefas, models/ORM existentes foram preservados e o trabalho concentrou-se em retirar responsabilidades das rotas. Isso comprova a adaptação entre linguagens e níveis de organização.
+
+Os principais desafios foram definir contratos seguros sem preservar vulnerabilidades, tratar senhas antigas sem perder registros, medir N+1 em vez de presumir ganho, distinguir APIs legacy de removidas e comprovar boot real. As decisões foram apresentadas antes da Fase 3; senhas legadas receberam migração ou redefinição explícita; os testes verificam rollback, permissões e efeitos. Bloqueios de loopback pelo sandbox foram repetidos com permissão; a demora de DNS reverso foi registrada e acomodada no prazo do teste, sem alterar o sistema. Não há alegação de ausência universal de anti-patterns nem validação de carga/produção.
+
 
 ---
 
@@ -681,7 +736,7 @@ Antes: três fontes com AppManager concentrando banco, HTTP e regras. Depois: 14
 - [Saída real dos testes](reports/regression-project-2.txt)
 - [Estrutura antes/depois, contratos e comandos](ecommerce-api-legacy/README.md)
 
-Para reproduzir: Node >=22, recomendado 24; `cd ecommerce-api-legacy`, `npm ci`, configurar ambiente conforme README, `npm start`. Validar com `npm test` e `npm run test:http`. Banco em memória e pagamento simulado; sem validação de carga/serviços externos. O projeto 3 continua pendente e não foi iniciado nesta execução. Nenhum push, publicação ou PR realizado.
+Para reproduzir: Node >=22, recomendado 24; `cd ecommerce-api-legacy`, `npm ci`, configurar ambiente conforme README, `npm start`. Validar com `npm test` e `npm run test:http`. Banco em memória e pagamento simulado; sem validação de carga/serviços externos. Naquela execução, o projeto 3 permaneceu pendente; seu resultado posterior está registrado abaixo. Nenhum push, publicação ou PR realizado.
 
 ## Resultados — Projeto 3 concluído
 

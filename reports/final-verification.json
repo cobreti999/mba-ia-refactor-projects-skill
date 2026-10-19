@@ -1,0 +1,208 @@
+{
+  "verified_at": "2026-10-19T20:32:02.269875+00:00",
+  "base_commit": "c1583bc3a7e9adb559b948dedd5af5dc547fe616",
+  "repository": {
+    "url": "https://github.com/cobreti999/mba-ia-refactor-projects-skill",
+    "visibility_verified": "public",
+    "default_branch_verified": "main",
+    "push_permission_verified": true,
+    "verification": "GitHub connector metadata and git fetch origin"
+  },
+  "manual_findings": {
+    "1": {
+      "CRITICAL": 3,
+      "HIGH": 2,
+      "MEDIUM": 2,
+      "LOW": 2
+    },
+    "2": {
+      "CRITICAL": 2,
+      "HIGH": 2,
+      "MEDIUM": 2,
+      "LOW": 2
+    },
+    "3": {
+      "CRITICAL": 1,
+      "HIGH": 2,
+      "MEDIUM": 3,
+      "LOW": 2
+    }
+  },
+  "skill": {
+    "copies": [
+      {
+        "project": "code-smells-project",
+        "validator": "Skill is valid!",
+        "identical_copy": true,
+        "launcher_syntax": true
+      },
+      {
+        "project": "ecommerce-api-legacy",
+        "validator": "Skill is valid!",
+        "identical_copy": true,
+        "launcher_syntax": true
+      },
+      {
+        "project": "task-manager-api",
+        "validator": "Skill is valid!",
+        "identical_copy": true,
+        "launcher_syntax": true
+      }
+    ],
+    "patterns": 16,
+    "transformations": 12,
+    "syntax_checked_examples": {
+      "python": 20,
+      "javascript": 4
+    },
+    "knowledge_references": 6
+  },
+  "projects": [
+    {
+      "project": "code-smells-project",
+      "tests_passed": 12,
+      "tests_failed": 0,
+      "http_cases": 24,
+      "endpoints_verified": 19,
+      "processes_stopped": true,
+      "tests_log": "final-tests-project-1.txt",
+      "http_evidence": "final-http-project-1.json",
+      "source_sha256": {
+        "requirements.txt": "2955cdfdcd8fab71c96b237b9735db8431750ef9322497a283495f7fe5175602",
+        "app.py": "5ab60ef6e1441eb581862af394b5efb6e979a842f1342ee61992d653914ea2e5",
+        "tests/smoke_http.py": "72b64a7cf2021ca2d98f3bfef32d8f759e26a044c5268cda850ad8a17a7f5e25",
+        "tests/test_app.py": "96ceb1ee971f54c4609e5d4af5cef40e3cb6df9e57d2719efc70009f8f03d1c0",
+        "loja/config.py": "8309b9272c13fe640a22ded3eaf22efb058fb26c387df4ff8476c405318f4c2c",
+        "loja/database.py": "91c4e39312bc1db957435ed48a66f6b8475beec19b9e8bcf31b60ed918d169fc",
+        "loja/__init__.py": "7347082d2a9ae154b2b6d82c7719d88171b9fcf5bb1f2afe15252fd2b223c2d9",
+        "loja/context.py": "25f56f1896069fdfa3413e2478ab07b516e18067363678b9a088c1e46fca14e0",
+        "loja/cli.py": "de49d37d7e1bab90d550dfd045ee9bc46ece4fa0a3292dd445ea0f76a317273d",
+        "loja/http.py": "87cd7e918014a96d834145f26f36cf2aa76658360b08d1931805d3a4b0bc813c",
+        "loja/errors.py": "9152685a880a9c0741f66f9daac1193fdd25c01dac5789a469c4c309033f4ae3",
+        "loja/routes.py": "9f2a8d74df7e7da354b61a26c0d1f18e3f0f0cdd7fe7869b69d2f20ecc634838",
+        "loja/models/users.py": "64ef52576cd433c11bd5d0db09f7fd973254139a3a769ad60b5265424ae20378",
+        "loja/models/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "loja/models/products.py": "6056c84f91f24ec6995777e5f83e651f87641ad2b460afb3ec0275938e18e66a",
+        "loja/models/orders.py": "7fe1f69719c4328d8b759b99d726d26e40874cac94f72b01aafa6704beab5b8d",
+        "loja/models/admin.py": "544cff679b76e9086f853dfefca52d7c37f134e1f67d602e541f7f01ed721662",
+        "loja/controllers/system.py": "a91e6e3b07b6696180a96f1d4dbc50f15d324cb354ea1bb4545697d4a8f82988",
+        "loja/controllers/users.py": "b19b9fb214e286326086fb41a0ba8a444230199334f9cb0e7df08ed2af5841dd",
+        "loja/controllers/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "loja/controllers/products.py": "51df79e31e1afb00dd7c71075183a06351a2d43bf5d6d8109266bf00eb8d1b3d",
+        "loja/controllers/orders.py": "388621e678f20f52a76a308929761deca458e8ef04c9658f59e42ca596b51ced",
+        "loja/views/serializers.py": "2adaebcfd0a85e17c7830d7806a3521b8c9bef6d2a589ade95883e0f640a48db",
+        "loja/views/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "loja/services/accounts.py": "05110fa1d365ecef738dee64a34f023dcd214dd3936b57bd7719a07cb6faa982",
+        "loja/services/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "loja/services/orders.py": "7d89c4d1e7689155709bd831678ae95abb7f4472924644e348a2fb11692a19a6",
+        "loja/services/reports.py": "cbf57c90d70fd2bb48f5d70ade49e50516f4d16b896783082f2c95a1466fef11",
+        "loja/services/validation.py": "a5acf45ba6563870f56eead9932a6cd1eb0ed84317c9f30198e8edaa7075f096"
+      }
+    },
+    {
+      "project": "ecommerce-api-legacy",
+      "tests_passed": 16,
+      "tests_failed": 0,
+      "http_cases": 26,
+      "endpoints_verified": 3,
+      "processes_stopped": true,
+      "tests_log": "final-tests-project-2.txt",
+      "http_evidence": "final-http-project-2.json",
+      "source_sha256": {
+        "package-lock.json": "939edcc78183dafd7b98e4480223ca724c1d0d101e84840fe829f466ffdd2880",
+        "package.json": "aaf596cabf98e89e450c3fc8e1d4b1ce93b0edef4876161b6a845e5b87d9c18f",
+        "tests/regression.test.js": "0058e902b30326b87fb810611c6870d359c6754ea59f6724f106a768d88029c6",
+        "tests/helpers.js": "b673e11f0d5318396025893315948d7c0b68449e291c7898d1007d3f74534d0e",
+        "tests/http-fixture.js": "52e33ead1b04d154734df418f55db2f8be7b1247b89f0f1c9c724bca31d0611c",
+        "tests/smoke-http.js": "297c72f4470254164e84edbb584ec686e7b3ae761f5cc6fdc7730ef972d6a438",
+        "src/server.js": "ac61018b26207efc3966143a6418a30b4ee7d21a9572815c6bdc476a757d1b75",
+        "src/app.js": "86f06a7b867f02b5f4fa6ef31f2b00eda48c4ba5f82c50e3825ec8f4748d7144",
+        "src/middleware/auth.js": "34d810005aa81786773cc5a7551f6f9b6e2596efca54140813b3f9f9e05e8f66",
+        "src/middleware/errors.js": "4c7bcb3f4a57bb32bdf1f5d29b800e4d60cdc242d66a01838276e88348b74cee",
+        "src/database/index.js": "0014ee7f620ad59e37f6c2f7488b141e9444c99e1bd44d125e55c5c2641b51c1",
+        "src/config/index.js": "ef84b43a9da0c5a523812072a5d050fa6603361081fb8808180a450c06767313",
+        "src/security/passwords.js": "3ee1d4a7729405d88a73a86a4fe84e2e3d21d16b0964967946310b7ce73c3b68",
+        "src/models/index.js": "2a55cecc9dc0674b967c4f306ad3c788ffab9ebcff71019a1aa5bd17ec3163d3",
+        "src/controllers/index.js": "5644b8b83cc608fb7e3b19f585fca968d11a378e7504007790dfb282c32ca788",
+        "src/controllers/validation.js": "921e5c1733205f4df8258a959fb17375257e1df390245b73551aa9e6b222b08f",
+        "src/routes/index.js": "761f3316a719a9d2f23d46c736641ad826027370c9bcbf82cca98dac51ba5a41",
+        "src/services/index.js": "2d491c0d4013d4642c9ecb54430d2b8d5927fbec08f68edc787becb2c7a678e6",
+        "src/services/errors.js": "cf50409202579a6aa553e3d45ca1f236b36b090ca1931ba877b5caf8ad85d5f0",
+        "src/services/payment.js": "7bce5f7637d37d66f9e0a808db24b779d2ae74fbb0a199dba22883cf309a8b96"
+      }
+    },
+    {
+      "project": "task-manager-api",
+      "tests_passed": 16,
+      "tests_failed": 0,
+      "http_cases": 44,
+      "endpoints_verified": 22,
+      "processes_stopped": true,
+      "tests_log": "final-tests-project-3.txt",
+      "http_evidence": "final-http-project-3.json",
+      "source_sha256": {
+        "config.py": "c9ef4e2f8ae7a0a6d1236df5b1df62ea3303ef549bce471ad5fe055cc276fef7",
+        "requirements.txt": "2012c77cae1ce75b28e162f0d1c4df53112d7c352dc266488541d86806a9a6cf",
+        "database.py": "80ed315e56743af6c322cbea92e65105b3873dff3a98c99de3ce94ae07becac5",
+        "seed.py": "fea1eab01c5317e0ca9466dc658268a455fc362f294e69e3f7741a665afaef1d",
+        "http_support.py": "4fc7c79dfa980d3f63a32eb04352e917716e2cf23f97c0ecc1559ac727fe95f3",
+        "context.py": "b7e697cde3ef2e41bffb79b1a2f35378b40bb7609446cd36c44e35f710472ca1",
+        "cli.py": "e63db39c21101567ac3616a1451b13a53f9d1a96db433030d3af0b297c8af1f9",
+        "app.py": "6832fdd758bd08875cc7b512055861b3e53492db465d46393a0522ca7d0e48f0",
+        "requirements-lock.txt": "3f2b5db0bb9a46d89cca8722dbacfd128607a26d2a2a0f366ad72ad216a6412d",
+        "tests/smoke_http.py": "0eac4d77a2f951fee2372c8a90685b2e73bf8713b570eca179f5f6ba899ba24e",
+        "tests/test_app.py": "07ee31a01204ec6eee9808a753fdde90f55da0a05c2a023ec293219fcb1ae670",
+        "utils/clock.py": "314182e83dd6a47117ee71064e484a5568439459de7cd9da78f13cd0ed25b10e",
+        "utils/constants.py": "abbc984968897fb4e48ec2877f50386826f519400c9046b8ac53262a641637ff",
+        "utils/__init__.py": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+        "repositories/store.py": "4798bbc730db9047cbe84ecaa7f5f5d6ba9b0f626e3461017119ad913ea71211",
+        "repositories/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "models/user.py": "8db9c1bec68f2c46eb81957ef566401551e1bfe96682ccd501c8e6f548d2b487",
+        "models/task.py": "5ff2715ed0a798d5b0be08ac0b3f9ca83dbe07897d445e6013f39447efce5f9b",
+        "models/__init__.py": "706f2d67d6d11df57f0a3b12e0bf88827e9e56a53171a190a19c572186be41d0",
+        "models/category.py": "36500654fafc2b5967e32f5b155d835590f1a1cbe0ab2796ebcf6be6ae119da8",
+        "controllers/tasks.py": "392bce12fc3bae32c3e2ab26db05a07b0dd0e565ac4ff7d6ba5d492a7df70e59",
+        "controllers/users.py": "48967695768741cefbc8a3d69dc870d5558cd3a8ac2eb1007b2223e53ba115ba",
+        "controllers/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "controllers/reports.py": "ffbb1183755ef0a79c55f553c8fa905603d80dbcd996a2e7a51c82e44c38d615",
+        "views/serializers.py": "0258e4dcfa391ebe5d2c8cc1b2192b3d3807020e76188e5db0873c5548fbf7c6",
+        "views/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "routes/user_routes.py": "7660c943e45ad37024815a71532a2e9aa8202492892d0a9ccfb13db551daaf64",
+        "routes/__init__.py": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+        "routes/task_routes.py": "915cd844df7b8f605ff82368f29b6a5e20d5bc7b0f32b69a423c056533c52190",
+        "routes/report_routes.py": "a95739e47af65324f2ce15a8813a40d30a06fc74afef2038860e9c8c1d49b944",
+        "services/seeding.py": "7f16259ebb22cf01c6b69f9b165a2df957c14088a49a84d38ae85819a65e3df3",
+        "services/tasks.py": "2c15eec4bce5e14ad7296fb54fe9a52bee31003954808154279f393cf95cbcd1",
+        "services/accounts.py": "0a757c90cf06b8864d92602a233f76a9535453c1e4ff7087c398c45dc430e220",
+        "services/categories.py": "8dd181785983718249aa4fc21428916dce0773c7b55d34731b1fa58290fec256",
+        "services/__init__.py": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+        "services/reports.py": "1841486cd8688eea0a4f18fcdcbde5e03a6f1f5dd9c844ab79ef73a60f800dcd",
+        "services/errors.py": "387d41975596590ee00457daa9acf928bf7c636efd5ac295ba0b62ec8cc63a3a",
+        "services/validation.py": "772a9b0279c99462f8ba51e00572fde3144073f01f963a466096a5c03adf3cc2"
+      }
+    }
+  ],
+  "totals": {
+    "tests_passed": 44,
+    "tests_failed": 0,
+    "http_cases_passed": 94,
+    "endpoints_verified": 44,
+    "findings_corrected": 39
+  },
+  "checks": {
+    "local_document_links": true,
+    "no_tracked_env_database_dependencies_or_caches": true,
+    "original_audit_evidence_preserved": true,
+    "approval_before_refactoring_recorded": true,
+    "working_skill_copies_identical": true
+  },
+  "environment_notes": [
+    "Project 2 first final test attempt had two EPERM sandbox listener failures; authorized retry passed 16/16.",
+    "Python HTTP readiness permits up to 60 seconds for OS reverse DNS.",
+    "Tests use disposable data; no external payments/notifications."
+  ],
+  "limitations": [
+    "Local functional validation; no production deployment, load test or comprehensive dependency vulnerability audit.",
+    "Existing passwords require the documented explicit migration/reset; no user data was migrated during this check."
+  ]
+}

@@ -54,7 +54,7 @@ Todos os 14 achados foram corrigidos no escopo aprovado. Caminhos abaixo são re
 | F001 | Corrigido | `models/products.py; models/users.py` | Parametrização; regressão de login e busca com payload SQL. |
 | F002 | Corrigido | `routes.py; http.py; controllers/system.py` | Tokens, papéis e propriedade; testes 401/403, SQL livre rejeitado e reset opt-in. |
 | F003 | Corrigido | `services/accounts.py; views/serializers.py; cli.py` | Hash, resposta pública e migração explícita; testes de idempotência, atomicidade e preservação. |
-| F004 | Corrigido | `config.py; controllers/system.py; app.py` | Chave obrigatória externa, health reduzido, debug desligado; testes de configuração/health. |
+| F004 | Corrigido | `config.py; controllers/system.py; ../app.py` | Chave obrigatória externa, health reduzido, debug desligado; testes de configuração/health. |
 | F005 | Corrigido | `services/; models/; controllers/; routes.py` | Separação MVC; revisão de imports e testes dos fluxos completos. |
 | F006 | Corrigido | `context.py; database.py` | Conexão por contexto, fechamento no teardown; regressões de isolamento/fechamento e concorrência. |
 | F007 | Corrigido | `database.py; services/orders.py` | Transação explícita; falha injetada após baixa de estoque verifica rollback e próximo pedido. |
@@ -86,4 +86,11 @@ O teste HTTP inclui os fluxos autorizados de CRUD, cadastro/login, pedidos/statu
 - [x] Contratos e comandos de migração documentados.
 - [x] Banco descartável e processo encerrado; nenhum banco do usuário alterado.
 
-Limites: validação local com SQLite e servidor de desenvolvimento Flask; não foi realizado teste de carga nem implantação. Valores monetários continuam em ponto flutuante e cancelamento não repõe estoque, preservando a regra original. As versões adicionais fixadas no manifesto eram dependências transitivas já instaladas e agora importadas diretamente. Os projetos 2 e 3 aguardam suas próprias fases e aprovações.
+Limites: validação local com SQLite e servidor de desenvolvimento Flask; não foi realizado teste de carga nem implantação. Valores monetários continuam em ponto flutuante e cancelamento não repõe estoque, preservando a regra original. As versões adicionais fixadas no manifesto eram dependências transitivas já instaladas e agora importadas diretamente. Na conclusão desta etapa, os projetos 2 e 3 ainda aguardavam suas fases; os resultados posteriores constam nos respectivos relatórios.
+
+
+## Complemento da conferência final
+
+As seções de achados, proposta e resultado correspondem ao template da skill: evidência e impacto na tabela original; recomendação/validação nas linhas de mesmo ID do resultado; contratos/dados na proposta aprovada. Para tornar os deltas rastreáveis por finding: F001 preserva entradas como valores SQL; F002/F004 protegem operações e retiram configuração; F003 altera formato de senha e representação pública com migração explícita; F007/F008 tornam o pedido atômico e validam quantidades; F010 retorna 400 para entradas inválidas. F005/F006/F009/F011/F012/F013/F014 mudam implementação, diagnóstico ou carga de dados preservando o comportamento de sucesso descrito.
+
+A revisão final repetiu 12 testes e 24 cenários HTTP/19 endpoints. Evidências adicionais em final-tests-project-1.txt, final-http-project-1.json e final-verification.json. O prazo de prontidão do HTTP runner passou de 15 para 60 segundos, conforme a demora de DNS reverso observada no mesmo ambiente no projeto 3; a aplicação não mudou. Referências originais permanecem relativas à base 6d1ce62; correções podem ser localizadas nos arquivos da tabela final.

@@ -1,0 +1,413 @@
+{
+  "date": "2026-10-19T20:27:44.468Z",
+  "command": "npm run test:http -- <evidence-path>",
+  "runtime": "v24.22.0",
+  "express": "4.22.1",
+  "driver": {
+    "name": "better-sqlite3",
+    "version": "13.0.3"
+  },
+  "isolation": "in-memory databases, synthetic data, loopback ephemeral ports; no external payment calls",
+  "cases": [
+    {
+      "name": "report requires admin",
+      "method": "GET",
+      "path": "/api/admin/financial-report",
+      "expected": 401,
+      "observed": 401,
+      "body": {
+        "error": {
+          "code": "UNAUTHORIZED",
+          "message": "Credencial administrativa necessária"
+        }
+      }
+    },
+    {
+      "name": "report rejects incorrect admin",
+      "method": "GET",
+      "path": "/api/admin/financial-report",
+      "expected": 401,
+      "observed": 401,
+      "body": {
+        "error": {
+          "code": "UNAUTHORIZED",
+          "message": "Credencial administrativa necessária"
+        }
+      }
+    },
+    {
+      "name": "initial authorized report",
+      "method": "GET",
+      "path": "/api/admin/financial-report",
+      "expected": 200,
+      "observed": 200,
+      "body": [
+        {
+          "course": "Clean Architecture",
+          "revenue": 997,
+          "students": [
+            {
+              "student": "Demo Student",
+              "paid": 997
+            }
+          ]
+        },
+        {
+          "course": "Docker",
+          "revenue": 0,
+          "students": []
+        }
+      ]
+    },
+    {
+      "name": "new checkout commits",
+      "method": "POST",
+      "path": "/api/checkout",
+      "expected": 200,
+      "observed": 200,
+      "body": {
+        "msg": "Sucesso",
+        "enrollment_id": 2
+      }
+    },
+    {
+      "name": "existing user authenticates",
+      "method": "POST",
+      "path": "/api/checkout",
+      "expected": 200,
+      "observed": 200,
+      "body": {
+        "msg": "Sucesso",
+        "enrollment_id": 3
+      }
+    },
+    {
+      "name": "existing user wrong password",
+      "method": "POST",
+      "path": "/api/checkout",
+      "expected": 401,
+      "observed": 401,
+      "body": {
+        "error": {
+          "code": "INVALID_CREDENTIALS",
+          "message": "Credenciais inválidas"
+        }
+      }
+    },
+    {
+      "name": "denied payment",
+      "method": "POST",
+      "path": "/api/checkout",
+      "expected": 400,
+      "observed": 400,
+      "body": {
+        "error": {
+          "code": "PAYMENT_DENIED",
+          "message": "Pagamento recusado"
+        }
+      }
+    },
+    {
+      "name": "course missing",
+      "method": "POST",
+      "path": "/api/checkout",
+      "expected": 404,
+      "observed": 404,
+      "body": {
+        "error": {
+          "code": "COURSE_NOT_FOUND",
+          "message": "Curso não encontrado"
+        }
+      }
+    },
+    {
+      "name": "missing fields",
+      "method": "POST",
+      "path": "/api/checkout",
+      "expected": 400,
+      "observed": 400,
+      "body": {
+        "error": {
+          "code": "INVALID_INPUT",
+          "message": "Dados inválidos"
+        }
+      }
+    },
+    {
+      "name": "numeric card",
+      "method": "POST",
+      "path": "/api/checkout",
+      "expected": 400,
+      "observed": 400,
+      "body": {
+        "error": {
+          "code": "INVALID_INPUT",
+          "message": "Dados inválidos"
+        }
+      }
+    },
+    {
+      "name": "object card",
+      "method": "POST",
+      "path": "/api/checkout",
+      "expected": 400,
+      "observed": 400,
+      "body": {
+        "error": {
+          "code": "INVALID_INPUT",
+          "message": "Dados inválidos"
+        }
+      }
+    },
+    {
+      "name": "array body",
+      "method": "POST",
+      "path": "/api/checkout",
+      "expected": 400,
+      "observed": 400,
+      "body": {
+        "error": {
+          "code": "INVALID_INPUT",
+          "message": "Dados inválidos"
+        }
+      }
+    },
+    {
+      "name": "null body",
+      "method": "POST",
+      "path": "/api/checkout",
+      "expected": 400,
+      "observed": 400,
+      "body": {
+        "error": {
+          "code": "INVALID_JSON",
+          "message": "JSON inválido"
+        }
+      }
+    },
+    {
+      "name": "string course id",
+      "method": "POST",
+      "path": "/api/checkout",
+      "expected": 400,
+      "observed": 400,
+      "body": {
+        "error": {
+          "code": "INVALID_INPUT",
+          "message": "Dados inválidos"
+        }
+      }
+    },
+    {
+      "name": "missing password",
+      "method": "POST",
+      "path": "/api/checkout",
+      "expected": 400,
+      "observed": 400,
+      "body": {
+        "error": {
+          "code": "INVALID_INPUT",
+          "message": "Dados inválidos"
+        }
+      }
+    },
+    {
+      "name": "malformed JSON",
+      "method": "POST",
+      "path": "/api/checkout",
+      "expected": 400,
+      "observed": 400,
+      "body": {
+        "error": {
+          "code": "INVALID_JSON",
+          "message": "JSON inválido"
+        }
+      }
+    },
+    {
+      "name": "oversized JSON",
+      "method": "POST",
+      "path": "/api/checkout",
+      "expected": 413,
+      "observed": 413,
+      "body": {
+        "error": {
+          "code": "PAYLOAD_TOO_LARGE",
+          "message": "Corpo excede 16 KiB"
+        }
+      }
+    },
+    {
+      "name": "unsupported JSON charset",
+      "method": "POST",
+      "path": "/api/checkout",
+      "expected": 415,
+      "observed": 415,
+      "body": {
+        "error": {
+          "code": "UNSUPPORTED_ENCODING",
+          "message": "Codificação não suportada"
+        }
+      }
+    },
+    {
+      "name": "delete requires admin",
+      "method": "DELETE",
+      "path": "/api/users/1",
+      "expected": 401,
+      "observed": 401,
+      "body": {
+        "error": {
+          "code": "UNAUTHORIZED",
+          "message": "Credencial administrativa necessária"
+        }
+      }
+    },
+    {
+      "name": "delete rejects incorrect admin",
+      "method": "DELETE",
+      "path": "/api/users/1",
+      "expected": 401,
+      "observed": 401,
+      "body": {
+        "error": {
+          "code": "UNAUTHORIZED",
+          "message": "Credencial administrativa necessária"
+        }
+      }
+    },
+    {
+      "name": "delete enrolled user preserves history",
+      "method": "DELETE",
+      "path": "/api/users/1",
+      "expected": 409,
+      "observed": 409,
+      "body": {
+        "error": {
+          "code": "USER_ENROLLED",
+          "message": "Usuário possui matrículas"
+        }
+      }
+    },
+    {
+      "name": "delete missing user",
+      "method": "DELETE",
+      "path": "/api/users/999",
+      "expected": 404,
+      "observed": 404,
+      "body": {
+        "error": {
+          "code": "USER_NOT_FOUND",
+          "message": "Usuário não encontrado"
+        }
+      }
+    },
+    {
+      "name": "delete invalid id",
+      "method": "DELETE",
+      "path": "/api/users/abc",
+      "expected": 400,
+      "observed": 400,
+      "body": {
+        "error": {
+          "code": "INVALID_INPUT",
+          "message": "Dados inválidos"
+        }
+      }
+    },
+    {
+      "name": "report confirms only successful checkout effects",
+      "method": "GET",
+      "path": "/api/admin/financial-report",
+      "expected": 200,
+      "observed": 200,
+      "body": [
+        {
+          "course": "Clean Architecture",
+          "revenue": 997,
+          "students": [
+            {
+              "student": "Demo Student",
+              "paid": 997
+            }
+          ]
+        },
+        {
+          "course": "Docker",
+          "revenue": 994,
+          "students": [
+            {
+              "student": "HTTP Student",
+              "paid": 497
+            },
+            {
+              "student": "HTTP Student",
+              "paid": 497
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "delete unlinked fixture user succeeds",
+      "method": "DELETE",
+      "path": "/api/users/2",
+      "expected": 200,
+      "observed": 200,
+      "body": {
+        "msg": "Usuário deletado"
+      }
+    },
+    {
+      "name": "deleted user is now absent",
+      "method": "DELETE",
+      "path": "/api/users/2",
+      "expected": 404,
+      "observed": 404,
+      "body": {
+        "error": {
+          "code": "USER_NOT_FOUND",
+          "message": "Usuário não encontrado"
+        }
+      }
+    }
+  ],
+  "processes": [
+    {
+      "command": "node src/server.js",
+      "pid": 98237,
+      "logs": [
+        "{\"event\":\"ready\",\"host\":\"127.0.0.1\",\"port\":50732,\"pid\":98237}"
+      ],
+      "stopped": true,
+      "port": 50732,
+      "exitCode": 0,
+      "signal": null
+    },
+    {
+      "command": "node tests/http-fixture.js",
+      "pid": 98239,
+      "logs": [
+        "{\"event\":\"ready\",\"host\":\"127.0.0.1\",\"port\":50744,\"pid\":98239}"
+      ],
+      "stopped": true,
+      "port": 50744,
+      "exitCode": 0,
+      "signal": null
+    }
+  ],
+  "sqlite": "3.53.4",
+  "httpEffects": {
+    "successfulNewUserEnrollments": 2,
+    "course2Revenue": 994,
+    "originalHistoryPreserved": true
+  },
+  "deleteDatabaseEffects": {
+    "users": 1,
+    "unlinked": 0,
+    "foreignKeyErrors": 0
+  },
+  "verifiedEndpoints": 3,
+  "passed": true,
+  "logsContainSecrets": false
+}

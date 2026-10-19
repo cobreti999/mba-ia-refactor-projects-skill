@@ -115,4 +115,4 @@ Critério de contagem e rotas dinâmicas não resolvidas: ...
 - Estado da análise: completa no escopo informado / parcial, com motivo.
 ```
 
-Após o resumo, aplique o encerramento definido no `SKILL.md`. Não avance para a auditoria nem crie arquivos ao produzir esta saída.
+Após o resumo, aplique o encerramento definido no `SKILL.md`. Não crie arquivos ao produzir esta saída. Após imprimir o resumo, prossiga para a Auditoria, salvo pedido explícito para executar somente a Análise.

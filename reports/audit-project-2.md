@@ -257,7 +257,7 @@ Caracterizar original isolado com dados sintéticos e captura protegida; testes 
 - Prompt apresentado: Phase 2 complete. Proceed with refactoring (Phase 3)? [y/n]
 - Resposta real do usuário nesta sessão: `y`.
 - Aprovação: salvar este relatório e executar proposta/deltas, evidências e commit local do projeto 2. Não abrange outros projetos ou publicação.
-- Fase 3: em execução; resultados serão acrescentados após validação.
+- Estado ao aprovar: Fase 3 autorizada. Execução concluída e resultados registrados na seção seguinte.
 
 
 ## Fase 3 — resultado após aprovação

@@ -1,0 +1,24 @@
+✔ scrypt uses independent salts, verifies credentials and rejects legacy formats (233.783583ms)
+✔ config requires explicit credentials and bounded valid options (0.4585ms)
+✔ validation handles types, boundaries, normalization and public keys (0.9945ms)
+✔ checkout commits user, enrollment, payment and audit with original response semantics (240.037917ms)
+✔ denied payment, invalid credentials and missing/inactive courses leave no writes (116.530583ms)
+✔ rollback leaves all tables unchanged when users insertion fails (113.406375ms)
+✔ rollback leaves all tables unchanged when enrollments insertion fails (116.154708ms)
+✔ rollback leaves all tables unchanged when payments insertion fails (122.633166ms)
+✔ rollback leaves all tables unchanged when audit_logs insertion fails (130.261917ms)
+✔ concurrent signup cannot create duplicate identities or partial transactions (187.554208ms)
+✔ delete preserves enrolled users and history; nonexistent and unlinked users have distinct outcomes (117.441792ms)
+✔ report preserves empty courses, unpaid enrollment, denied amount and deterministic ordering in one statement (60.395875ms)
+✔ independent app databases do not share mutable state (173.793667ms)
+✔ schema initialization failure and listener failure close resources without a ready event (10.222458ms)
+✔ HTTP error boundary sanitizes malformed JSON, DB failures and credentials; DELETE success checked against DB (215.660833ms)
+✔ missing boot configuration fails clearly, and importing app has no listener or seed effects (133.76625ms)
+ℹ tests 16
+ℹ suites 0
+ℹ pass 16
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2095.823667
